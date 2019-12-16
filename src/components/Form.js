@@ -1,41 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { message: "" };
-  }
+const Form = () => {
+  const [message, setMessage] = useState("");
 
-  handleChange = e => {
-    this.setState({ message: e.target.value });
+  const handleChange = e => {
+    setMessage(e.target.value);
   };
 
-  submitMessage = () => {
+  const submitMessage = () => {
     // pass this.state.message to home in a props function from home that puts message in the messages array
-    console.log(this.state.message);
+    console.log(message);
   };
-
-  render() {
-    const { message } = this.state;
-    return (
-      <div className="form">
-        <textarea
-          placeholder="What do you have in mind?"
-          className="form-input"
-          onChange={e => this.handleChange(e)}
-          value={message}
-        ></textarea>
-        <div className="message-button-home">
-          <Button
-            type="Tweet"
-            submitMessage={this.submitMessage.bind(this)}
-            message={message}
-          />
-        </div>
+  return (
+    <div className="form">
+      <textarea
+        placeholder="What do you have in mind?"
+        className="form-input"
+        onChange={e => handleChange(e)}
+        value={message}
+      ></textarea>
+      <div className="message-button-home">
+        <Button
+          type="Tweet"
+          submitMessage={submitMessage.bind(this)}
+          message={message}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Form;
