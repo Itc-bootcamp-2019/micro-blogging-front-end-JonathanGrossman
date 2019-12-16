@@ -4,10 +4,10 @@ const Posts = props => {
   const { messagesArray } = props;
   return (
     <div className="posts">
-      {console.log(messagesArray)}
-      {messagesArray.map(message => {
-        return <div>{message.message}</div>;
-      })}
+      {messagesArray !== null &&
+        messagesArray.map(message => {
+          return <div key={message.id}>{message.message}</div>;
+        })}
     </div>
   );
 };

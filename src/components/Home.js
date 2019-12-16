@@ -4,13 +4,18 @@ import Posts from "./Posts";
 
 const Home = () => {
   const [messagesArray, setMessagesArray] = useState(
-    JSON.parse(localStorage.getItem("microBlogMessages")) || ""
+    JSON.parse(localStorage.getItem("microBlogMessages")) || []
   );
 
   const addMessageToArray = value => {
     let existingEntries = localStorage.getItem("microBlogMessages");
-    const newArray = [...JSON.parse(existingEntries), value];
-    localStorage.setItem("microBlogMessages", JSON.stringify(newArray));
+    if (existingEntries !== null) {
+      const newArray = [...JSON.parse(existingEntries), value];
+      localStorage.setItem("microBlogMessages", JSON.stringify(newArray));
+    } else {
+      localStorage.setItem("microBlogMessages", JSON.stringify([value]));
+    }
+
     const updatedEntries = JSON.parse(
       localStorage.getItem("microBlogMessages")
     );
