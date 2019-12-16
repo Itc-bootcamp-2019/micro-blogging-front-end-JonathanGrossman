@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button";
 
 const Form = () => {
+  const [author, setAuthor] = useState("Jonathan Grossman");
   const [message, setMessage] = useState("");
 
   const handleChange = e => {
