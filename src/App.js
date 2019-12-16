@@ -6,15 +6,13 @@ function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-          </ul>
+        <nav className="navbar">
+          <Link to="/" className="navbar-item">
+            Home
+          </Link>
+          <Link to="/profile" className="navbar-item">
+            Profile
+          </Link>
         </nav>
 
         <Switch>
