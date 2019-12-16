@@ -1,3 +1,7 @@
+body {
+  background: #15202b;
+}
+
 .navbar {
   display: flex;
   justify-content: left;
@@ -21,4 +25,13 @@
   margin: 20px;
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
+}
+
+.home {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
 }
