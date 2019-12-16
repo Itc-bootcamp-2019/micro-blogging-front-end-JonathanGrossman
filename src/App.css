@@ -35,3 +35,50 @@ body {
   flex-direction: column;
   height: 100vh;
 }
+
+.form {
+  position: absolute;
+  top: 105px;
+  width: 600px;
+  height: 180px;
+  border-radius: 6px;
+}
+
+.form-input {
+  background-color: #15202b;
+  font-size: 16px;
+  line-height: 19px;
+  color: #cccccc;
+  width: 600px;
+  height: 180px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  border: 2px solid #cccccc;
+  border-radius: 6px;
+  resize: none;
+  outline: none;
+}
+
+.form::placeholder {
+  color: #cccccc;
+}
+
+.button {
+  height: 34px;
+  width: 68px;
+  background: #007bff;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #ffffff;
+}
+
+.message-button-home {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+}

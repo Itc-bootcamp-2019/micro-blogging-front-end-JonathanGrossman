@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 
 class Form extends React.Component {
   constructor(props) {
@@ -6,7 +7,22 @@ class Form extends React.Component {
   }
 
   render() {
-    return <div>Form</div>;
+    return (
+      <div className="form">
+        <textarea
+          placeholder="What do you have in mind?"
+          className="form-input"
+        >
+          {/* <textarea
+          
+          className="message-input"
+        ></textarea> */}
+        </textarea>
+        <div className="message-button-home">
+          <Button type="Tweet" />
+        </div>
+      </div>
+    );
   }
 }
 
