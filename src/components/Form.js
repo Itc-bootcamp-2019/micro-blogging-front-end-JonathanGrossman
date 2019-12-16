@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Button from "./Button";
 
-const Form = () => {
+const Form = props => {
+  const { addMessageToArray } = props;
   const [author, setAuthor] = useState("Jonathan Grossman");
   const [message, setMessage] = useState("");
 
@@ -10,8 +11,7 @@ const Form = () => {
   };
 
   const submitMessage = () => {
-    // pass this.state.message to home in a props function from home that puts message in the messages array
-    console.log(message);
+    addMessageToArray({ author, message });
   };
   return (
     <div className="form">
