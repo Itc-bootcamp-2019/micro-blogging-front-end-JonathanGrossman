@@ -1,7 +1,11 @@
 body {
   background: #15202b;
 }
-
+.navbar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .navbar {
   display: flex;
   justify-content: left;
@@ -9,9 +13,8 @@ body {
   background: #343a40;
   border-radius: 6px;
   position: absolute;
-  width: 1076px;
+  width: 75%;
   height: 58px;
-  left: 182px;
   top: 0px;
   padding: 0 20px;
 }
@@ -39,7 +42,7 @@ body {
 .form {
   position: absolute;
   top: 105px;
-  width: 600px;
+  width: 37.3%;
   height: 180px;
   border-radius: 6px;
 }
@@ -49,7 +52,7 @@ body {
   font-size: 16px;
   line-height: 19px;
   color: #cccccc;
-  width: 600px;
+  width: 100%;
   height: 180px;
   padding: 20px 10px;
   box-sizing: border-box;
@@ -73,12 +76,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
   color: #ffffff;
 }
 
 .message-button-home {
   position: absolute;
-  bottom: 20px;
-  right: 10px;
+  bottom: 0;
+  right: 0;
+  margin: 20px 10px;
 }

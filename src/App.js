@@ -7,14 +7,17 @@ function App() {
   return (
     <Router>
       <div>
-        <nav className="navbar">
-          <Link to="/" className="navbar-item">
-            Home
-          </Link>
-          <Link to="/profile" className="navbar-item">
-            Profile
-          </Link>
+        <nav className="navbar-wrapper">
+          <div className="navbar">
+            <Link to="/" className="navbar-item">
+              Home
+            </Link>
+            <Link to="/profile" className="navbar-item">
+              Profile
+            </Link>
+          </div>
         </nav>
+
         <Switch>
           <Route path="/">{/* Home component goes here */}</Route>
           <Route path="/about">{/* Profile component goes here */}</Route>
