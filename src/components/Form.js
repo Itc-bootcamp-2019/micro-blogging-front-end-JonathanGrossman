@@ -8,20 +8,27 @@ const Form = props => {
   const [message, setMessage] = useState("");
   const [id, setId] = useState("");
   const [dateCreated, setDateCreated] = useState("");
+  const [isInputValid, setInputValidity] = useState(false);
 
   const handleChange = e => {
-    setMessage(e.target.value);
     const messageId = uuid();
     const date = new Date();
+    setMessage(e.target.value);
     setId(messageId);
     setDateCreated(date.getTime());
     setAuthor("Jonathan Grossman");
+    validateInput();
+  };
+  const validateInput = () => {
+    if (message.length > 140 || message.length < 1) {
+      setInputValidity(false);
+    } else {
+      setInputValidity(true);
+    }
   };
 
   const submitMessage = () => {
-    if (message.length <= 140 && message.length > 0) {
-      addMessageToArray({ author, message, id, dateCreated });
-    }
+    isInputValid && addMessageToArray({ author, message, id, dateCreated });
   };
   return (
     <div className="form">
@@ -36,6 +43,7 @@ const Form = props => {
           type="Tweet"
           submitMessage={submitMessage.bind(this)}
           message={message}
+          isInputValid={isInputValid}
         />
       </div>
     </div>
