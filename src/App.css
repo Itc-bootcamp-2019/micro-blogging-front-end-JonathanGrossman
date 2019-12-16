@@ -85,3 +85,9 @@ body {
   right: 0;
   margin: 20px 10px;
 }
+
+.posts {
+  position: absolute;
+  top: 305px;
+  width: 37.3%;
+}

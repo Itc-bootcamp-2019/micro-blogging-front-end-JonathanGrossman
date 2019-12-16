@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <div className="home">
       <Form addMessageToArray={addMessageToArray} />
-      <Posts />
+      <Posts messagesArray={messagesArray} />
     </div>
   );
 };

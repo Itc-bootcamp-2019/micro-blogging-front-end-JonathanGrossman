@@ -1,13 +1,15 @@
 import React from "react";
 
-class Posts extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return <div>Posts</div>;
-  }
-}
+const Posts = props => {
+  const { messagesArray } = props;
+  return (
+    <div className="posts">
+      {console.log(messagesArray)}
+      {messagesArray.map(message => {
+        return <div>{message.message}</div>;
+      })}
+    </div>
+  );
+};
 
 export default Posts;
