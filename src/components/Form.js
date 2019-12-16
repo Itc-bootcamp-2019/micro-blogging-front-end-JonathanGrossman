@@ -24,9 +24,8 @@ class Form extends React.Component {
           placeholder="What do you have in mind?"
           className="form-input"
           onChange={e => this.handleChange(e)}
-        >
-          {message}
-        </textarea>
+          value={message}
+        ></textarea>
         <div className="message-button-home">
           <Button
             type="Tweet"
