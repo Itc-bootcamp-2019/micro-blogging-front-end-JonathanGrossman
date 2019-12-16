@@ -4,18 +4,24 @@ import { uuid } from "uuidv4";
 
 const Form = props => {
   const { addMessageToArray } = props;
-  const [author, setAuthor] = useState("Jonathan Grossman");
+  const [author, setAuthor] = useState("");
   const [message, setMessage] = useState("");
   const [id, setId] = useState("");
+  const [dateCreated, setDateCreated] = useState("");
 
   const handleChange = e => {
     setMessage(e.target.value);
     const messageId = uuid();
+    const date = new Date();
     setId(messageId);
+    setDateCreated(date.getTime());
+    setAuthor("Jonathan Grossman");
   };
 
   const submitMessage = () => {
-    addMessageToArray({ author, message, id });
+    if (message.length <= 140 && message.length > 0) {
+      addMessageToArray({ author, message, id, dateCreated });
+    }
   };
   return (
     <div className="form">
