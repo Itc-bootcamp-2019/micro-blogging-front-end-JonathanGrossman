@@ -1,8 +1,12 @@
 import React from "react";
 
 const Button = props => {
-  const { type } = props;
-  return <div className="button">{type}</div>;
+  const { type, submitMessage } = props;
+  return (
+    <div className="button" onClick={submitMessage}>
+      {type}
+    </div>
+  );
 };
 
 export default Button;
