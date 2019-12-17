@@ -18,7 +18,7 @@ const Form = props => {
   const handleChange = e => {
     const date = new Date();
     setContent(e.target.value);
-    setDate(date.getTime());
+    setDate(date.toISOString());
     validateInput();
   };
   const toggleButtonAppearance = () => {
