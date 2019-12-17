@@ -10,16 +10,15 @@ const Form = props => {
     setInputValidity,
     isSpinning,
     isError,
-    errorMessage
+    errorMessage,
+    userName
   } = props;
-  const [userName, setUserName] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState("");
   const handleChange = e => {
     const date = new Date();
     setContent(e.target.value);
     setDate(date.toISOString());
-    setUserName("Ron");
     validateInput();
   };
   const toggleButtonAppearnce = () => {

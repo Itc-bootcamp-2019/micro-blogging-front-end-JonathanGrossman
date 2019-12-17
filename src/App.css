@@ -109,6 +109,7 @@ body {
   background: #343a40;
   border-radius: 6px;
   padding: 20px;
+  overflow-wrap: normal;
 }
 
 .message-credentials {
@@ -162,4 +163,45 @@ body {
   margin-bottom: 10px;
   height: 34px;
   width: 100%;
+}
+.profile {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.profile-title {
+  position: absolute;
+  width: 103px;
+  height: 42px;
+  left: 369px;
+  top: 110px;
+  color: white;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.username-title {
+  position: absolute;
+  height: 21px;
+  left: 368px;
+  top: 178px;
+  font-size: 18px;
+  line-height: 21px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.username-input {
+  color: white;
+  font-size: 16px;
+  line-height: 19px;
+  background: #15202b;
+  position: absolute;
+  width: 600px;
+  height: 61px;
+  left: 367px;
+  top: 205px;
+  border: 2px solid #cccccc;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 20px 15px;
 }

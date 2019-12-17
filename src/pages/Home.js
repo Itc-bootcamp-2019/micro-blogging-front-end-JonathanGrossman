@@ -3,7 +3,8 @@ import Form from "../components/Form";
 import Posts from "../components/Posts";
 import { getMessages, postMessage } from "../lib/api";
 
-const Home = () => {
+const Home = props => {
+  const { userName } = props;
   const [isInputValid, setInputValidity] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -53,6 +54,7 @@ const Home = () => {
         isSpinning={isSpinning}
         isError={isError}
         errorMessage={errorMessage}
+        userName={userName}
       />
       {messagesArray !== undefined && (
         <Posts

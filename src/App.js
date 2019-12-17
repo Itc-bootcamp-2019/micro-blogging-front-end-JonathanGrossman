@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 
 function App() {
+  const [userName, setUserName] = useState("Ron");
   return (
     <Router>
       <div>
@@ -21,13 +22,12 @@ function App() {
 
         <Switch>
           <Route exact path="/profile">
-            <Profile />
+            <Profile userName={userName} setUserName={setUserName} />
           </Route>
           <Route exact path="/">
-            <Home />
+            <Home userName={userName} />
           </Route>
         </Switch>
-        <Home />
       </div>
     </Router>
   );
