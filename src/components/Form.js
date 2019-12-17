@@ -18,7 +18,7 @@ const Form = props => {
   const handleChange = e => {
     const date = new Date();
     setContent(e.target.value);
-    setDate(date.toISOString());
+    setDate(date.getTime());
     validateInput();
   };
   const toggleButtonAppearance = () => {
@@ -50,7 +50,7 @@ const Form = props => {
   };
   return (
     <div className="form">
-      <div>{isError && <Alert errorMessage={errorMessage} />}</div>
+      <div>{isError && <Alert message={errorMessage} type="Error" />}</div>
       <textarea
         placeholder="What do you have in mind?"
         className="form-input"

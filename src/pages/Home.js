@@ -41,7 +41,7 @@ const Home = props => {
           setIsSpinning(false);
           setInputValidity(false);
           setErrorMessage("");
-        }, 2000);
+        }, 3000);
       });
   };
 
