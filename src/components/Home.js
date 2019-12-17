@@ -4,6 +4,8 @@ import Posts from "./Posts";
 import { getMessages, postMessage } from "../lib/api";
 
 const Home = () => {
+  const [isInputValid, setInputValidity] = useState(false);
+
   // NOTE: THIS IS FOR LOCAL STORAGE OF MESSAGES
   // const [messagesArray, setMessagesArray] = useState(
   //   JSON.parse(localStorage.getItem("microBlogMessages")) || []
@@ -19,7 +21,9 @@ const Home = () => {
   }, []);
 
   const addMessageToArray = value => {
-    postMessage(value);
+    postMessage(value).then(
+      response => (response.status === 200) & console.log(response)
+    );
 
     // NOTE: THIS IS FOR LOCAL STORAGE
     // let existingEntries = localStorage.getItem("microBlogMessages");
@@ -37,7 +41,11 @@ const Home = () => {
 
   return (
     <div className="home">
-      <Form addMessageToArray={addMessageToArray} />
+      <Form
+        addMessageToArray={addMessageToArray}
+        isInputValid={isInputValid}
+        setInputValidity={setInputValidity}
+      />
       {messagesArray !== undefined && <Posts messagesArray={messagesArray} />}
     </div>
   );

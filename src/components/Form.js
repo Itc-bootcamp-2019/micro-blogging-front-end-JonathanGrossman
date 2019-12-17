@@ -7,11 +7,10 @@ const Form = props => {
   // NOTE: THIS IS FOR LOCAL STORAGE
   // const [id, setId] = useState("");
 
-  const { addMessageToArray } = props;
+  const { addMessageToArray, isInputValid, setInputValidity } = props;
   const [userName, setUserName] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState("");
-  const [isInputValid, setInputValidity] = useState(false);
 
   const handleChange = e => {
     // NOTE: THIS IS FOR LOCAL STORAGE
