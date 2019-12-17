@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
-import { uuid } from "uuidv4";
+// NOTE: THIS IS FOR LOCAL STORAGE
+// import { uuid } from "uuidv4";
 
 const Form = props => {
   // NOTE: THIS IS FOR LOCAL STORAGE
@@ -18,9 +19,8 @@ const Form = props => {
     // setId(messageId);
     const date = new Date();
     setContent(e.target.value);
-
-    setDate(date.getTime());
-    setUserName("Jonathan Grossman");
+    setDate(date.toISOString());
+    setUserName("Ron");
     validateInput();
   };
   const validateInput = () => {

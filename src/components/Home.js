@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Form from "./Form";
 import Posts from "./Posts";
-import { getMessages } from "../lib/api";
+import { getMessages, postMessage } from "../lib/api";
 
 const Home = () => {
   // NOTE: THIS IS FOR LOCAL STORAGE OF MESSAGES
@@ -19,7 +19,8 @@ const Home = () => {
   }, []);
 
   const addMessageToArray = value => {
-    console.log(value);
+    postMessage(value);
+
     // NOTE: THIS IS FOR LOCAL STORAGE
     // let existingEntries = localStorage.getItem("microBlogMessages");
     // if (existingEntries !== null) {
@@ -37,7 +38,6 @@ const Home = () => {
   return (
     <div className="home">
       <Form addMessageToArray={addMessageToArray} />
-
       {messagesArray !== undefined && <Posts messagesArray={messagesArray} />}
     </div>
   );

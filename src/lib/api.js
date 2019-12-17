@@ -8,7 +8,7 @@ export function postMessage(messageObj) {
   return axios.post(
     `https://itc-bootcamp-19-dot-charcha-dev.appspot.com/tweet`,
     {
-      messageObj
+      tweet: messageObj
     }
   );
 }

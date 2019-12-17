@@ -5,7 +5,7 @@ const Posts = props => {
 
   // NOTE: THIS IS FOR LOCAL STORAGE
   // const sortedMessagesArray = array => {
-  //   return array.sort((a, b) => b.dateCreated - a.dateCreated);
+  //   return array.sort((a, b) => b.date - a.date);
   // };
 
   const sortedMessagesArray = array => {
@@ -18,7 +18,7 @@ const Posts = props => {
       {messagesArray !== null &&
         sortedMessagesArray(messagesArray).map(message => {
           return (
-            <div key={message.id} className="posted-message">
+            <div key={message.date} className="posted-message">
               <div className="message-credentials">
                 <div>{message.userName}</div>
                 <div>{new Date(message.date).toISOString()}</div>
@@ -33,10 +33,10 @@ const Posts = props => {
           return (
             <div key={message.id} className="posted-message">
               <div className="message-credentials">
-                <div>{message.author}</div>
-                <div>{new Date(message.dateCreated).toISOString()}</div>
+                <div>{message.userName}</div>
+                <div>{new Date(message.date).toISOString()}</div>
               </div>
-              {message.message}
+              {message.content}
             </div>
           );
         })} */}
