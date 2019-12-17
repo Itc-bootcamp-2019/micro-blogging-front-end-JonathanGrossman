@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: #15202b;
 }
@@ -83,7 +87,7 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 20px 10px;
+  margin: 10px 5px;
 }
 
 .submit-button-off {
@@ -95,4 +99,21 @@ body {
   position: absolute;
   top: 305px;
   width: 37.3%;
+}
+
+.posted-message {
+  margin-bottom: 15px;
+  width: 100%;
+  background: #343a40;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.message-credentials {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 16px;
+  color: #6c757d;
+  margin-bottom: 20px;
 }

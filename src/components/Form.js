@@ -20,6 +20,7 @@ const Form = props => {
     validateInput();
   };
   const validateInput = () => {
+    localStorage.clear();
     if (message.length > 140 || message.length < 1) {
       setInputValidity(false);
     } else {

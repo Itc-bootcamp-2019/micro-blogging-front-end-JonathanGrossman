@@ -11,7 +11,15 @@ const Posts = props => {
     <div className="posts">
       {messagesArray !== null &&
         sortedMessagesArray(messagesArray).map(message => {
-          return <div key={message.id}>{message.message}</div>;
+          return (
+            <div key={message.id} className="posted-message">
+              <div className="message-credentials">
+                <div>{message.author}</div>
+                <div>{Date(message.dateCreated)}</div>
+              </div>
+              {message.message}
+            </div>
+          );
         })}
     </div>
   );
