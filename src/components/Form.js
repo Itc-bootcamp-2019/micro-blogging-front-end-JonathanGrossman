@@ -22,6 +22,20 @@ const Form = props => {
     setUserName("Ron");
     validateInput();
   };
+  const toggleButtonAppearnce = () => {
+    if (isSpinning) {
+      return <Spinner />;
+    } else {
+      return (
+        <Button
+          type="Tweet"
+          submitMessage={submitMessage.bind(this)}
+          message={content}
+          isInputValid={isInputValid}
+        />
+      );
+    }
+  };
   const validateInput = () => {
     localStorage.clear();
     if (content.length > 140 || content.length < 1) {
@@ -42,18 +56,7 @@ const Form = props => {
         onChange={e => handleChange(e)}
         value={content}
       ></textarea>
-      <div className="message-button-home">
-        {isSpinning ? (
-          <Spinner />
-        ) : (
-          <Button
-            type="Tweet"
-            submitMessage={submitMessage.bind(this)}
-            message={content}
-            isInputValid={isInputValid}
-          />
-        )}
-      </div>
+      <div className="message-button-home">{toggleButtonAppearnce()}</div>
     </div>
   );
 };
