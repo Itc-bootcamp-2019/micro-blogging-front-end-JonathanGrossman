@@ -121,6 +121,14 @@ body {
   margin-bottom: 20px;
 }
 
+.profile-spinner {
+  position: absolute;
+  left: 889px;
+  top: 282px;
+  height: 34px;
+  width: 68px;
+}
+
 .spinner {
   position: absolute;
   bottom: 0;

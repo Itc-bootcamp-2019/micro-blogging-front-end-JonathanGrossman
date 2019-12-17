@@ -21,7 +21,7 @@ const Form = props => {
     setDate(date.toISOString());
     validateInput();
   };
-  const toggleButtonAppearnce = () => {
+  const toggleButtonAppearance = () => {
     if (isSpinning) {
       return <Spinner />;
     } else {
@@ -57,7 +57,7 @@ const Form = props => {
         onChange={e => handleChange(e)}
         value={content}
       ></textarea>
-      <div className="message-button-home">{toggleButtonAppearnce()}</div>
+      <div className="message-button-home">{toggleButtonAppearance()}</div>
     </div>
   );
 };

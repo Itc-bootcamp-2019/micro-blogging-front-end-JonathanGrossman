@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../components/Button";
+import Spinner from "../components/Spinner";
 
 const Profile = props => {
   const { userName, setUserName } = props;
+  const [isUpdatingName, setIsUpdatingName] = useState(false);
 
   const updateLocalStorage = () => {
+    setIsUpdatingName(true);
+    setTimeout(function() {
+      setIsUpdatingName(false);
+    }, 2000);
     localStorage.setItem("microBlogUserName", userName);
   };
+  const toggleButtonAppearance = () => {
+    if (isUpdatingName) {
+      return (
+        <div className="profile-spinner">
+          <Spinner />
+        </div>
+      );
+    } else {
+      return <Button type="Save" submitInput={updateLocalStorage} />;
+    }
+  };
+  // const toggleButtonAppearance = () => {
+  //   if (isUpdatingName) {
+  //     return (
+  //       <div className="profile-spinner">
+  //         <Spinner />
+  //       </div>
+  //     );
+  //   } else if (!isUpdatingName) {
+  //     return <Button type="Save" submitInput={updateLocalStorage} />;
+  //   }
+  // };
 
   const handleChange = e => {
     setUserName(e.target.value);
@@ -22,7 +50,15 @@ const Profile = props => {
           onChange={e => handleChange(e)}
           className="username-input"
         />
-        <Button type="Save" submitInput={updateLocalStorage} />
+        {toggleButtonAppearance()}
+        {/* {isUpdatingName && (
+          <div className="profile-spinner">
+            <Spinner />
+          </div>
+        )}
+        {!isUpdatingName && (
+          <Button type="Save" submitInput={updateLocalStorage} />
+        )} */}
       </div>
     </div>
   );
