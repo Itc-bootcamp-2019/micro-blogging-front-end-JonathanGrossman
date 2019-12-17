@@ -3,6 +3,11 @@ import Button from "../components/Button";
 
 const Profile = props => {
   const { userName, setUserName } = props;
+
+  const updateLocalStorage = () => {
+    localStorage.setItem("microBlogUserName", userName);
+  };
+
   const handleChange = e => {
     setUserName(e.target.value);
   };
@@ -17,7 +22,7 @@ const Profile = props => {
           onChange={e => handleChange(e)}
           className="username-input"
         />
-        <Button type="Save" submitInput={setUserName} />
+        <Button type="Save" submitInput={updateLocalStorage} />
       </div>
     </div>
   );

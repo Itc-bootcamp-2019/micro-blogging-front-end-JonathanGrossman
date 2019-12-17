@@ -33,7 +33,11 @@ const Button = props => {
         </div>
       );
     } else if (type === "Save") {
-      return <div className={buttonClass}>{type}</div>;
+      return (
+        <div className={buttonClass} onClick={submitInput}>
+          {type}
+        </div>
+      );
     }
   };
 
