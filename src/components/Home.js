@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "./Form";
 import Posts from "./Posts";
+import { getMessages } from "../lib/api";
 
 const Home = () => {
-  const [messagesArray, setMessagesArray] = useState(
-    JSON.parse(localStorage.getItem("microBlogMessages")) || []
-  );
+  // NOTE: THIS IS FOR LOCAL STORAGE OF MESSAGES
+  // const [messagesArray, setMessagesArray] = useState(
+  //   JSON.parse(localStorage.getItem("microBlogMessages")) || []
+  // );
+
+  const [messagesArray, setMessagesArray] = useState([]);
+
+  useEffect(() => {
+    getMessages().then(
+      response =>
+        response.status === 200 && setMessagesArray(response.data.tweets)
+    );
+  }, []);
 
   const addMessageToArray = value => {
     let existingEntries = localStorage.getItem("microBlogMessages");
@@ -25,7 +36,8 @@ const Home = () => {
   return (
     <div className="home">
       <Form addMessageToArray={addMessageToArray} />
-      <Posts messagesArray={messagesArray} />
+
+      {messagesArray !== undefined && <Posts messagesArray={messagesArray} />}
     </div>
   );
 };
