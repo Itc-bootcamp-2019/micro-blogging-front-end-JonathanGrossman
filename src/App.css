@@ -189,6 +189,9 @@ body {
   line-height: 21px;
   color: rgba(255, 255, 255, 0.8);
 }
+.profile-input-wrapper {
+  position: relative;
+}
 
 .username-input {
   color: white;
@@ -204,4 +207,10 @@ body {
   box-sizing: border-box;
   border-radius: 6px;
   padding: 20px 15px;
+}
+
+.input-button-profile {
+  position: absolute;
+  left: 889px;
+  top: 282px;
 }

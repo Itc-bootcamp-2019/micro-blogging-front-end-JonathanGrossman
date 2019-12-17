@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../components/Button";
 
 const Profile = props => {
   const { userName } = props;
@@ -6,7 +7,10 @@ const Profile = props => {
     <div className="profile">
       <div className="profile-title">Profile</div>
       <div className="username-title">User Name</div>
-      <input type="text" value={userName} className="username-input" />
+      <div className="profile-input-wrapper">
+        <input type="text" value={userName} className="username-input" />
+        <Button type="Save" />
+      </div>
     </div>
   );
 };

@@ -16,10 +16,11 @@ const Button = props => {
       setButtonClass("button message-button-home submit-button-on");
     } else if (!isInputValid && type === "Tweet") {
       setButtonClass("button message-button-home submit-button-off");
-    } else {
-      setButtonClass("button message-button-home");
+    } else if (type === "Save") {
+      setButtonClass("button input-button-profile");
     }
   };
+
   return (
     <div
       className={buttonClass}
