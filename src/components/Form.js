@@ -45,7 +45,10 @@ const Form = props => {
     }
   };
   const submitMessage = () => {
-    isInputValid && addMessageToArray({ date, userName, content });
+    if (isInputValid) {
+      addMessageToArray({ date, userName, content });
+      setContent("");
+    }
   };
   return (
     <div className="form">
