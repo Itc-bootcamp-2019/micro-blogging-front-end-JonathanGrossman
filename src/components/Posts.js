@@ -14,7 +14,6 @@ const Posts = props => {
 
   return (
     <div className="posts">
-      {console.log(sortedMessagesArray(messagesArray))}
       {messagesArray !== null &&
         sortedMessagesArray(messagesArray).map(message => {
           return (

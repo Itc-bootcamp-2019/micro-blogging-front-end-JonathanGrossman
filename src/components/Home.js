@@ -15,11 +15,15 @@ const Home = () => {
   const [messagesArray, setMessagesArray] = useState([]);
 
   useEffect(() => {
+    loadMessages();
+  }, []);
+
+  const loadMessages = () => {
     getMessages().then(
       response =>
         response.status === 200 && setMessagesArray(response.data.tweets)
     );
-  }, []);
+  };
 
   const addMessageToArray = value => {
     setInputValidity(false);
@@ -28,6 +32,7 @@ const Home = () => {
       if (response.status === 200) {
         setInputValidity(true);
         setIsSpinning(false);
+        loadMessages();
       }
     });
 
