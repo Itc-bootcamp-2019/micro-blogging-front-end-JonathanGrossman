@@ -28,7 +28,7 @@ const Form = props => {
       return (
         <Button
           type="Tweet"
-          submitMessage={submitMessage.bind(this)}
+          submitInput={submitMessage.bind(this)}
           message={content}
           isInputValid={isInputValid}
         />

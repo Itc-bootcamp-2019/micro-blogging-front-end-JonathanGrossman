@@ -9,7 +9,7 @@ const Button = props => {
     applyClass();
   });
 
-  const { type, submitMessage, isInputValid } = props;
+  const { type, submitInput, isInputValid } = props;
 
   const applyClass = () => {
     if (isInputValid && type === "Tweet") {
@@ -21,15 +21,23 @@ const Button = props => {
     }
   };
 
-  return (
-    <div
-      className={buttonClass}
-      onClick={submitMessage}
-      disabled={!isInputValid}
-    >
-      {type}
-    </div>
-  );
+  const displayButton = () => {
+    if (type === "Tweet") {
+      return (
+        <div
+          className={buttonClass}
+          onClick={submitInput}
+          disabled={!isInputValid}
+        >
+          {type}
+        </div>
+      );
+    } else if (type === "Save") {
+      return <div className={buttonClass}>{type}</div>;
+    }
+  };
+
+  return displayButton();
 };
 
 export default Button;
