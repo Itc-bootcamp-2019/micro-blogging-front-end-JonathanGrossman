@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Home from "./components/Home";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -19,8 +20,12 @@ function App() {
         </nav>
 
         <Switch>
-          <Route path="/">{/* Home component goes here */}</Route>
-          <Route path="/about">{/* Profile component goes here */}</Route>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
         </Switch>
         <Home />
       </div>

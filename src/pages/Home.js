@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Form from "./Form";
-import Posts from "./Posts";
+import Form from "../components/Form";
+import Posts from "../components/Posts";
 import { getMessages, postMessage } from "../lib/api";
 
 const Home = () => {
