@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
+import Spinner from "./Spinner";
+
 // NOTE: THIS IS FOR LOCAL STORAGE
 // import { uuid } from "uuidv4";
 
@@ -7,7 +9,7 @@ const Form = props => {
   // NOTE: THIS IS FOR LOCAL STORAGE
   // const [id, setId] = useState("");
 
-  const { addMessageToArray, isInputValid, setInputValidity } = props;
+  const { addMessageToArray, isInputValid, setInputValidity, isSpinning } = props;
   const [userName, setUserName] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState("");
@@ -45,12 +47,16 @@ const Form = props => {
         value={content}
       ></textarea>
       <div className="message-button-home">
-        <Button
-          type="Tweet"
-          submitMessage={submitMessage.bind(this)}
-          message={content}
-          isInputValid={isInputValid}
-        />
+        {isSpinning ? (
+          <Spinner />
+        ) : (
+          <Button
+            type="Tweet"
+            submitMessage={submitMessage.bind(this)}
+            message={content}
+            isInputValid={isInputValid}
+          />
+        )}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { getMessages, postMessage } from "../lib/api";
 
 const Home = () => {
   const [isInputValid, setInputValidity] = useState(false);
+  const [isSpinning, setIsSpinning] = useState(false);
 
   // NOTE: THIS IS FOR LOCAL STORAGE OF MESSAGES
   // const [messagesArray, setMessagesArray] = useState(
@@ -21,9 +22,12 @@ const Home = () => {
   }, []);
 
   const addMessageToArray = value => {
-    postMessage(value).then(
-      response => (response.status === 200) & console.log(response)
-    );
+    setInputValidity(false);
+    setIsSpinning(true);
+    // NOTE: THIS IS FOR UNCOMMENTING AFTER TESTING SPINNER
+    // postMessage(value).then(
+    //   response => response.status === 200 && console.log(response)
+    // );
 
     // NOTE: THIS IS FOR LOCAL STORAGE
     // let existingEntries = localStorage.getItem("microBlogMessages");
@@ -45,8 +49,15 @@ const Home = () => {
         addMessageToArray={addMessageToArray}
         isInputValid={isInputValid}
         setInputValidity={setInputValidity}
+        isSpinning={isSpinning}
       />
-      {messagesArray !== undefined && <Posts messagesArray={messagesArray} />}
+      {messagesArray !== undefined && (
+        <Posts
+          messagesArray={messagesArray}
+          isInputValid={isInputValid}
+          setInputValidity={setInputValidity}
+        />
+      )}
     </div>
   );
 };
