@@ -15,7 +15,7 @@ const Posts = props => {
             <div key={message.id} className="posted-message">
               <div className="message-credentials">
                 <div>{message.author}</div>
-                <div>{Date(message.dateCreated)}</div>
+                <div>{new Date(message.dateCreated).toISOString()}</div>
               </div>
               {message.message}
             </div>
