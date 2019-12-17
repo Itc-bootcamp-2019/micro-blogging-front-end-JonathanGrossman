@@ -19,18 +19,19 @@ const Home = () => {
   }, []);
 
   const addMessageToArray = value => {
-    let existingEntries = localStorage.getItem("microBlogMessages");
-    if (existingEntries !== null) {
-      const newArray = [...JSON.parse(existingEntries), value];
-      localStorage.setItem("microBlogMessages", JSON.stringify(newArray));
-    } else {
-      localStorage.setItem("microBlogMessages", JSON.stringify([value]));
-    }
-
-    const updatedEntries = JSON.parse(
-      localStorage.getItem("microBlogMessages")
-    );
-    setMessagesArray(updatedEntries);
+    console.log(value);
+    // NOTE: THIS IS FOR LOCAL STORAGE
+    // let existingEntries = localStorage.getItem("microBlogMessages");
+    // if (existingEntries !== null) {
+    //   const newArray = [...JSON.parse(existingEntries), value];
+    //   localStorage.setItem("microBlogMessages", JSON.stringify(newArray));
+    // } else {
+    //   localStorage.setItem("microBlogMessages", JSON.stringify([value]));
+    // }
+    // const updatedEntries = JSON.parse(
+    //   localStorage.getItem("microBlogMessages")
+    // );
+    // setMessagesArray(updatedEntries);
   };
 
   return (
