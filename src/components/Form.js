@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import Spinner from "./Spinner";
-
-// NOTE: THIS IS FOR LOCAL STORAGE
-// import { uuid } from "uuidv4";
+import Alert from "./Alert";
 
 const Form = props => {
-  // NOTE: THIS IS FOR LOCAL STORAGE
-  // const [id, setId] = useState("");
-
-  const { addMessageToArray, isInputValid, setInputValidity, isSpinning } = props;
+  const {
+    addMessageToArray,
+    isInputValid,
+    setInputValidity,
+    isSpinning,
+    isError,
+    errorMessage
+  } = props;
   const [userName, setUserName] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState("");
-
   const handleChange = e => {
-    // NOTE: THIS IS FOR LOCAL STORAGE
-    // const messageId = uuid();
-    // setId(messageId);
     const date = new Date();
     setContent(e.target.value);
     setDate(date.toISOString());
@@ -32,14 +30,12 @@ const Form = props => {
       setInputValidity(true);
     }
   };
-
   const submitMessage = () => {
     isInputValid && addMessageToArray({ date, userName, content });
-    // NOTE: THIS IS FOR LOCAL STORAGE
-    // isInputValid && addMessageToArray({ userName, content, id, date });
   };
   return (
     <div className="form">
+      <div>{isError && <Alert errorMessage={errorMessage} />}</div>
       <textarea
         placeholder="What do you have in mind?"
         className="form-input"
@@ -47,7 +43,6 @@ const Form = props => {
         value={content}
       ></textarea>
       <div className="message-button-home">
-        {console.log(isSpinning)}
         {isSpinning ? (
           <Spinner />
         ) : (

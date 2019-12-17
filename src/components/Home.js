@@ -6,12 +6,8 @@ import { getMessages, postMessage } from "../lib/api";
 const Home = () => {
   const [isInputValid, setInputValidity] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
-
-  // NOTE: THIS IS FOR LOCAL STORAGE OF MESSAGES
-  // const [messagesArray, setMessagesArray] = useState(
-  //   JSON.parse(localStorage.getItem("microBlogMessages")) || []
-  // );
-
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [messagesArray, setMessagesArray] = useState([]);
 
   useEffect(() => {
@@ -28,26 +24,24 @@ const Home = () => {
   const addMessageToArray = value => {
     setInputValidity(false);
     setIsSpinning(true);
-    postMessage(value).then(response => {
-      if (response.status === 200) {
-        setInputValidity(true);
-        setIsSpinning(false);
-        loadMessages();
-      }
-    });
-
-    // NOTE: THIS IS FOR LOCAL STORAGE
-    // let existingEntries = localStorage.getItem("microBlogMessages");
-    // if (existingEntries !== null) {
-    //   const newArray = [...JSON.parse(existingEntries), value];
-    //   localStorage.setItem("microBlogMessages", JSON.stringify(newArray));
-    // } else {
-    //   localStorage.setItem("microBlogMessages", JSON.stringify([value]));
-    // }
-    // const updatedEntries = JSON.parse(
-    //   localStorage.getItem("microBlogMessages")
-    // );
-    // setMessagesArray(updatedEntries);
+    postMessage(value)
+      .then(response => {
+        if (response.status === 200) {
+          setInputValidity(true);
+          setIsSpinning(false);
+          loadMessages();
+        }
+      })
+      .catch(error => {
+        setIsError(true);
+        setErrorMessage(error.response.data);
+        setTimeout(function() {
+          setIsError(false);
+          setIsSpinning(false);
+          setInputValidity(false);
+          setErrorMessage("");
+        }, 2000);
+      });
   };
 
   return (
@@ -57,6 +51,8 @@ const Home = () => {
         isInputValid={isInputValid}
         setInputValidity={setInputValidity}
         isSpinning={isSpinning}
+        isError={isError}
+        errorMessage={errorMessage}
       />
       {messagesArray !== undefined && (
         <Posts
