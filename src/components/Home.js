@@ -24,10 +24,12 @@ const Home = () => {
   const addMessageToArray = value => {
     setInputValidity(false);
     setIsSpinning(true);
-    // NOTE: THIS IS FOR UNCOMMENTING AFTER TESTING SPINNER
-    // postMessage(value).then(
-    //   response => response.status === 200 && console.log(response)
-    // );
+    postMessage(value).then(response => {
+      if (response.status === 200) {
+        setInputValidity(true);
+        setIsSpinning(false);
+      }
+    });
 
     // NOTE: THIS IS FOR LOCAL STORAGE
     // let existingEntries = localStorage.getItem("microBlogMessages");

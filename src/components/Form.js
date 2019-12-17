@@ -47,6 +47,7 @@ const Form = props => {
         value={content}
       ></textarea>
       <div className="message-button-home">
+        {console.log(isSpinning)}
         {isSpinning ? (
           <Spinner />
         ) : (
