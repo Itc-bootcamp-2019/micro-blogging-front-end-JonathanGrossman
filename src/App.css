@@ -87,6 +87,8 @@ body {
   justify-content: center;
   align-items: center;
   color: #ffffff;
+  cursor: pointer;
+  border: none;
 }
 
 .message-button-home {

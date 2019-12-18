@@ -12,38 +12,35 @@ const Button = props => {
 
   const applyClass = () => {
     if (appContext.isInputValid && type === "Tweet") {
-      appContext.setButtonClass("button message-button-home submit-button-on");
+      appContext.setButtonClass("message-button-home submit-button-on");
     } else if (!appContext.isInputValid && type === "Tweet") {
-      appContext.setButtonClass("button message-button-home submit-button-off");
+      appContext.setButtonClass("message-button-home submit-button-off");
     } else if (type === "Save") {
-      appContext.setButtonClass("button input-button-profile");
+      appContext.setButtonClass("input-button-profile");
     }
   };
 
-  const displayButton = () => {
-    if (type === "Tweet") {
-      return (
-        <div
-          className={appContext.buttonClass}
+  return (
+    <div>
+      {type === "Tweet" && (
+        <button
+          className={"button " + appContext.buttonClass}
           onClick={appContext.submitMessage}
           disabled={!appContext.isInputValid}
         >
           {type}
-        </div>
-      );
-    } else if (type === "Save") {
-      return (
-        <div
+        </button>
+      )}
+      {type === "Save" && (
+        <button
           className={"button " + appContext.buttonClass}
           onClick={appContext.updateLocalStorage}
         >
           {type}
-        </div>
-      );
-    }
-  };
-
-  return displayButton();
+        </button>
+      )}
+    </div>
+  );
 };
 
 export default Button;

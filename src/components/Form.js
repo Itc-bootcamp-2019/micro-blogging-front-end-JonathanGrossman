@@ -13,13 +13,7 @@ const Form = () => {
     appContext.setDate(date.toISOString());
     validateInput();
   };
-  const toggleButtonAppearance = () => {
-    if (appContext.isSpinning) {
-      return <Spinner />;
-    } else {
-      return <Button type="Tweet" />;
-    }
-  };
+  
   const validateInput = () => {
     if (appContext.content.length > 140 || appContext.content.length < 1) {
       appContext.setInputValidity(false);
@@ -41,7 +35,10 @@ const Form = () => {
         onChange={e => handleChange(e)}
         value={appContext.content}
       ></textarea>
-      <div className="message-button-home">{toggleButtonAppearance()}</div>
+      <div className="message-button-home">
+        {appContext.isSpinning && <Spinner />}
+        {!appContext.isSpinning && <Button type="Tweet" />}
+        </div>
     </div>
   );
 };

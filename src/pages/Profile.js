@@ -7,20 +7,6 @@ import AppContext from "../context/AppContext";
 const Profile = () => {
   const appContext = useContext(AppContext);
 
-  
-  const toggleButtonAppearance = () => {
-    if (appContext.isUpdatingName) {
-      return (
-        <div className="profile-spinner">
-          <Spinner />
-        </div>
-      );
-    } else {
-      return <Button type="Save" />;
-    }
-  };
-
-
   const handleChange = e => {
     appContext.setUserName(e.target.value);
   };
@@ -40,7 +26,12 @@ const Profile = () => {
           onChange={e => handleChange(e)}
           className="username-input"
         />
-        {toggleButtonAppearance()}
+        {appContext.isUpdatingName && (
+          <div className="profile-spinner">
+            <Spinner />
+          </div>
+        )}
+        {!appContext.isUpdatingName && <Button type="Save" />}
       </div>
     </div>
   );

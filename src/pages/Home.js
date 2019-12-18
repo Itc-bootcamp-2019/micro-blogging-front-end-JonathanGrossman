@@ -11,8 +11,9 @@ const Home = () => {
     setTimeout(function() {
       getMessages().then(
         response =>
-          response.status === 200 &&
-          appContext.setMessagesArray(response.data.tweets)
+          {if (response.status === 200) {
+          appContext.setMessagesArray(response.data.tweets)}
+        }
       );
     }, 2000);
   });
