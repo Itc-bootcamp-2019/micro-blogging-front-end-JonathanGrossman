@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import AppContext from "./context/AppContext.js";
-import { getMessages, postMessage } from "./lib/api";
+import { postMessage } from "./lib/api";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -22,7 +27,7 @@ function App() {
   const [buttonClass, setButtonClass] = useState(
     "message-button-home submit-button-off"
   );
-  const successMessage = "User Name updated!"
+  const successMessage = "User Name updated!";
 
   const updateLocalStorage = () => {
     setIsUpdatingName(true);
@@ -48,7 +53,7 @@ function App() {
         if (response.status === 200) {
           setInputValidity(true);
           setIsSpinning(false);
-          setMessagesArray([...messagesArray], value)
+          setMessagesArray([...messagesArray], value);
         }
       })
       .catch(error => {
@@ -82,12 +87,12 @@ function App() {
       <div>
         <nav className="navbar-wrapper">
           <div className="navbar">
-            <Link to="/" className="navbar-item">
+            <NavLink exact to="/" className="navbar-item" activeClassName="selected">
               Home
-            </Link>
-            <Link to="/profile" className="navbar-item">
+            </NavLink>
+            <NavLink exact to="/profile" className="navbar-item" activeClassName="selected">
               Profile
-            </Link>
+            </NavLink>
           </div>
         </nav>
 
