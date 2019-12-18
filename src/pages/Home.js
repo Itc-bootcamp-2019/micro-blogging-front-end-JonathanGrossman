@@ -8,11 +8,13 @@ const Home = () => {
   const appContext = useContext(AppContext);
 
   const loadMessages = useCallback(() => {
-    getMessages().then(
-      response =>
-        response.status === 200 &&
-        appContext.setMessagesArray(response.data.tweets)
-    );
+    setTimeout(function() {
+      getMessages().then(
+        response =>
+          response.status === 200 &&
+          appContext.setMessagesArray(response.data.tweets)
+      );
+    }, 2000);
   });
 
   useEffect(() => {

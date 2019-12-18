@@ -48,10 +48,7 @@ function App() {
         if (response.status === 200) {
           setInputValidity(true);
           setIsSpinning(false);
-          getMessages().then(
-            response =>
-              response.status === 200 && setMessagesArray(response.data.tweets)
-          );
+          setMessagesArray([...messagesArray], value)
         }
       })
       .catch(error => {
