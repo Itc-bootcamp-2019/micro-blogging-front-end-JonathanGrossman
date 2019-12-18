@@ -9,7 +9,8 @@ import {
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import AppContext from "./context/AppContext.js";
-import { postMessage } from "./lib/api";
+// import { postMessage } from "./lib/api";
+import firebase from "./lib/firebase";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -55,24 +56,33 @@ function App() {
   const addMessageToArray = value => {
     setInputValidity(false);
     setIsSpinning(true);
-    postMessage(value)
-      .then(response => {
-        if (response.status === 200) {
-          setInputValidity(true);
-          setIsSpinning(false);
-          setMessagesArray([...messagesArray], value);
-        }
-      })
-      .catch(error => {
-        setIsError(true);
-        setErrorMessage(error.response.data);
-        setTimeout(function() {
-          setIsError(false);
-          setIsSpinning(false);
-          setInputValidity(false);
-          setErrorMessage("");
-        }, 3000);
-      });
+
+    const db = firebase.firestore();
+    db.settings({
+      timestampsInSnapshots: true
+    });
+    db.collection("messages").add(value);
+    setInputValidity(true);
+    setIsSpinning(false);
+    setMessagesArray([...messagesArray], value);
+    // postMessage(value)
+    //   .then(response => {
+    //     if (response.status === 200) {
+    //       setInputValidity(true);
+    //       setIsSpinning(false);
+    //       setMessagesArray([...messagesArray], value);
+    //     }
+    //   })
+    //   .catch(error => {
+    //     setIsError(true);
+    //     setErrorMessage(error.response.data);
+    //     setTimeout(function() {
+    //       setIsError(false);
+    //       setIsSpinning(false);
+    //       setInputValidity(false);
+    //       setErrorMessage("");
+    //     }, 3000);
+    //   });
   };
 
   const submitMessage = () => {
