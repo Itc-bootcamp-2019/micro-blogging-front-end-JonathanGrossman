@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
+import AppContext from "../context/AppContext";
 
 const Profile = props => {
-  const { userName, setUserName } = props;
+  const appContext = useContext(AppContext);
   const [isUpdatingName, setIsUpdatingName] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
@@ -15,7 +16,7 @@ const Profile = props => {
       setShowAlert(true);
       toggleAlert();
     }, 3000);
-    localStorage.setItem("microBlogUserName", userName);
+    localStorage.setItem("microBlogUserName", appContext.userName);
   };
   const toggleButtonAppearance = () => {
     if (isUpdatingName) {
@@ -36,7 +37,7 @@ const Profile = props => {
   };
 
   const handleChange = e => {
-    setUserName(e.target.value);
+    appContext.setUserName(e.target.value);
   };
   return (
     <div className="profile">
@@ -50,7 +51,7 @@ const Profile = props => {
       <div className="profile-input-wrapper">
         <input
           type="text"
-          value={userName}
+          value={appContext.userName}
           onChange={e => handleChange(e)}
           className="username-input"
         />

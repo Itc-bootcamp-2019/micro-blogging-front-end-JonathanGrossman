@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Form from "../components/Form";
 import Posts from "../components/Posts";
 import { getMessages, postMessage } from "../lib/api";
+import AppContext from "../context/AppContext";
 
 const Home = props => {
-  const { userName } = props;
+  // const { userName } = props;
+  const appContext = useContext(AppContext);
   const [isInputValid, setInputValidity] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -54,7 +56,7 @@ const Home = props => {
         isSpinning={isSpinning}
         isError={isError}
         errorMessage={errorMessage}
-        userName={userName}
+        userName={appContext.userName}
       />
       {messagesArray !== undefined && (
         <Posts

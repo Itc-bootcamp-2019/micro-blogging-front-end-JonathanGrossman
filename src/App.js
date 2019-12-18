@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import AppContext from "./context/AppContext.js";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -30,12 +31,20 @@ function App() {
         </nav>
 
         <Switch>
-          <Route exact path="/profile">
+          <AppContext.Provider value={{ userName, setUserName }}>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
+          </AppContext.Provider>
+          {/* <Route exact path="/profile">
             <Profile userName={userName} setUserName={setUserName} />
-          </Route>
-          <Route exact path="/">
+          </Route> */}
+          {/* <Route exact path="/">
             <Home userName={userName} />
-          </Route>
+          </Route> */}
         </Switch>
       </div>
     </Router>
