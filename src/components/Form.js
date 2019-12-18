@@ -13,7 +13,7 @@ const Form = () => {
     appContext.setDate(date.toISOString());
     validateInput();
   };
-  
+
   const validateInput = () => {
     if (appContext.content.length > 140 || appContext.content.length < 1) {
       appContext.setInputValidity(false);
@@ -24,11 +24,7 @@ const Form = () => {
 
   return (
     <div className="form">
-      <div>
-        {appContext.isError && (
-          <Alert type="Error" />
-        )}
-      </div>
+      <div>{appContext.isError && <Alert type="Error" />}</div>
       <textarea
         placeholder="What do you have in mind?"
         className="form-input"
@@ -38,7 +34,7 @@ const Form = () => {
       <div className="message-button-home">
         {appContext.isSpinning && <Spinner />}
         {!appContext.isSpinning && <Button type="Tweet" />}
-        </div>
+      </div>
     </div>
   );
 };

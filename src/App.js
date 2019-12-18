@@ -56,33 +56,27 @@ function App() {
   const addMessageToArray = value => {
     setInputValidity(false);
     setIsSpinning(true);
-
     const db = firebase.firestore();
     db.settings({
       timestampsInSnapshots: true
     });
-    db.collection("messages").add(value);
-    setInputValidity(true);
-    setIsSpinning(false);
-    setMessagesArray([...messagesArray], value);
-    // postMessage(value)
-    //   .then(response => {
-    //     if (response.status === 200) {
-    //       setInputValidity(true);
-    //       setIsSpinning(false);
-    //       setMessagesArray([...messagesArray], value);
-    //     }
-    //   })
-    //   .catch(error => {
-    //     setIsError(true);
-    //     setErrorMessage(error.response.data);
-    //     setTimeout(function() {
-    //       setIsError(false);
-    //       setIsSpinning(false);
-    //       setInputValidity(false);
-    //       setErrorMessage("");
-    //     }, 3000);
-    //   });
+    db.collection("messages")
+      .add({ userName: value })
+      .then(function(docRef) {
+        setInputValidity(true);
+        setIsSpinning(false);
+        setMessagesArray([...messagesArray], value);
+      })
+      .catch(function(error) {
+        setIsError(true);
+        setErrorMessage(error);
+        setTimeout(function() {
+          setIsError(false);
+          setIsSpinning(false);
+          setInputValidity(false);
+          setErrorMessage("");
+        }, 3000);
+      });
   };
 
   const submitMessage = () => {
