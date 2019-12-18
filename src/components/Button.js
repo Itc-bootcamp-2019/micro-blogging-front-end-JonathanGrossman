@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import AppContext from "../context/AppContext";
 
 const Button = props => {
-  const [buttonClass, setButtonClass] = useState(
-    "button message-button-home submit-button-off"
-  );
+  const appContext = useContext(AppContext);
 
   useEffect(() => {
     applyClass();
   });
 
-  const { type, submitInput, isInputValid } = props;
+  const { type } = props;
 
   const applyClass = () => {
-    if (isInputValid && type === "Tweet") {
-      setButtonClass("button message-button-home submit-button-on");
-    } else if (!isInputValid && type === "Tweet") {
-      setButtonClass("button message-button-home submit-button-off");
+    if (appContext.isInputValid && type === "Tweet") {
+      appContext.setButtonClass("button message-button-home submit-button-on");
+    } else if (!appContext.isInputValid && type === "Tweet") {
+      appContext.setButtonClass("button message-button-home submit-button-off");
     } else if (type === "Save") {
-      setButtonClass("button input-button-profile");
+      appContext.setButtonClass("button input-button-profile");
     }
   };
 
@@ -25,16 +24,19 @@ const Button = props => {
     if (type === "Tweet") {
       return (
         <div
-          className={buttonClass}
-          onClick={submitInput}
-          disabled={!isInputValid}
+          className={appContext.buttonClass}
+          onClick={appContext.submitMessage}
+          disabled={!appContext.isInputValid}
         >
           {type}
         </div>
       );
     } else if (type === "Save") {
       return (
-        <div className={"button " + buttonClass} onClick={submitInput}>
+        <div
+          className={"button " + appContext.buttonClass}
+          onClick={appContext.updateLocalStorage}
+        >
           {type}
         </div>
       );

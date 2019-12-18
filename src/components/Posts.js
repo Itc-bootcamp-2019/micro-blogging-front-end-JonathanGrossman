@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import AppContext from "../context/AppContext.js";
 
-const Posts = props => {
-  const { messagesArray } = props;
+const Posts = () => {
+  const appContext = useContext(AppContext);
+
   const sortedMessagesArray = array => {
     return array.sort((a, b) => b.date - a.date);
   };
 
   return (
     <div className="posts">
-      {messagesArray !== null &&
-        sortedMessagesArray(messagesArray).map(message => {
+      {appContext.messagesArray !== null &&
+        sortedMessagesArray(appContext.messagesArray).map(message => {
           return (
             <div key={message.date} className="posted-message">
               <div className="message-credentials">

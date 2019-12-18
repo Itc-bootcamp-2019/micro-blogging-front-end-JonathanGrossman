@@ -1,22 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import AppContext from "../context/AppContext";
 
 const Alert = props => {
-  const { message, type } = props;
-  const [applyThisClass, setApplyThisClass] = useState("");
-  useEffect(() => {
-    applyClass();
-  });
-  const applyClass = () => {
-    if (type === "Error") {
-      setApplyThisClass("alert alert-error");
-    } else if (type === "Success") {
-      setApplyThisClass("alert alert-success");
-    }
-  };
+  const { type } = props;
+  const appContext = useContext(AppContext);
 
   return (
     <div>
-      <div className={applyThisClass}>{message}</div>
+      {type === "Error" && (
+        <div className="alert alert-error">{appContext.errorMessage}</div>
+      )}
+      {type === "Success" && (
+        <div className="alert alert-success">{appContext.successMessage}</div>
+      )}
     </div>
   );
 };

@@ -1,40 +1,25 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
 import AppContext from "../context/AppContext";
 
-const Profile = props => {
+const Profile = () => {
   const appContext = useContext(AppContext);
-  const [isUpdatingName, setIsUpdatingName] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
 
-  const updateLocalStorage = () => {
-    setIsUpdatingName(true);
-    setTimeout(function() {
-      setIsUpdatingName(false);
-      setShowAlert(true);
-      toggleAlert();
-    }, 3000);
-    localStorage.setItem("microBlogUserName", appContext.userName);
-  };
+  
   const toggleButtonAppearance = () => {
-    if (isUpdatingName) {
+    if (appContext.isUpdatingName) {
       return (
         <div className="profile-spinner">
           <Spinner />
         </div>
       );
     } else {
-      return <Button type="Save" submitInput={updateLocalStorage} />;
+      return <Button type="Save" />;
     }
   };
 
-  const toggleAlert = () => {
-    setTimeout(function() {
-      setShowAlert(false);
-    }, 3000);
-  };
 
   const handleChange = e => {
     appContext.setUserName(e.target.value);
@@ -43,9 +28,9 @@ const Profile = props => {
     <div className="profile">
       <div className="profile-title">Profile</div>
       <div className="username-title">User Name</div>
-      {showAlert && (
+      {appContext.showAlert && (
         <div className="alert-profile-updated">
-          <Alert message={"User Name updated!"} type="Success" />
+          <Alert type="Success" />
         </div>
       )}
       <div className="profile-input-wrapper">

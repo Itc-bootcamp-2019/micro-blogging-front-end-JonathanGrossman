@@ -1,70 +1,28 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext, useCallback } from "react";
 import Form from "../components/Form";
 import Posts from "../components/Posts";
-import { getMessages, postMessage } from "../lib/api";
+import { getMessages } from "../lib/api";
 import AppContext from "../context/AppContext";
 
-const Home = props => {
-  // const { userName } = props;
+const Home = () => {
   const appContext = useContext(AppContext);
-  const [isInputValid, setInputValidity] = useState(false);
-  const [isSpinning, setIsSpinning] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [messagesArray, setMessagesArray] = useState([]);
+
+  const loadMessages = useCallback(() => {
+    getMessages().then(
+      response =>
+        response.status === 200 &&
+        appContext.setMessagesArray(response.data.tweets)
+    );
+  });
 
   useEffect(() => {
     loadMessages();
-  }, []);
-
-  const loadMessages = () => {
-    getMessages().then(
-      response =>
-        response.status === 200 && setMessagesArray(response.data.tweets)
-    );
-  };
-
-  const addMessageToArray = value => {
-    setInputValidity(false);
-    setIsSpinning(true);
-    postMessage(value)
-      .then(response => {
-        if (response.status === 200) {
-          setInputValidity(true);
-          setIsSpinning(false);
-          loadMessages();
-        }
-      })
-      .catch(error => {
-        setIsError(true);
-        setErrorMessage(error.response.data);
-        setTimeout(function() {
-          setIsError(false);
-          setIsSpinning(false);
-          setInputValidity(false);
-          setErrorMessage("");
-        }, 3000);
-      });
-  };
+  }, [loadMessages]);
 
   return (
     <div className="home">
-      <Form
-        addMessageToArray={addMessageToArray}
-        isInputValid={isInputValid}
-        setInputValidity={setInputValidity}
-        isSpinning={isSpinning}
-        isError={isError}
-        errorMessage={errorMessage}
-        userName={appContext.userName}
-      />
-      {messagesArray !== undefined && (
-        <Posts
-          messagesArray={messagesArray}
-          isInputValid={isInputValid}
-          setInputValidity={setInputValidity}
-        />
-      )}
+      <Form />
+      {appContext.messagesArray !== undefined && <Posts />}
     </div>
   );
 };
