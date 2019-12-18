@@ -19,6 +19,11 @@ const Profile = () => {
           <Alert type="Success" />
         </div>
       )}
+      {appContext.isError && (
+        <div className="alert-profile-updated">
+          <Alert type="Profile Error" />
+        </div>
+      )}
       <div className="profile-input-wrapper">
         <input
           type="text"

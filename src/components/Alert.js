@@ -13,6 +13,9 @@ const Alert = props => {
       {type === "Success" && (
         <div className="alert alert-success">{appContext.successMessage}</div>
       )}
+      {type === "Profile Error" && (
+        <div className="alert alert-error">Please input a User Name</div>
+      )}
     </div>
   );
 };

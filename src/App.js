@@ -30,13 +30,20 @@ function App() {
   const successMessage = "User Name updated!";
 
   const updateLocalStorage = () => {
-    setIsUpdatingName(true);
-    setTimeout(function() {
-      setIsUpdatingName(false);
-      setShowAlert(true);
-      toggleAlert();
-    }, 3000);
-    localStorage.setItem("microBlogUserName", userName);
+    if (userName !== "") {
+      setIsUpdatingName(true);
+      setTimeout(function() {
+        setIsUpdatingName(false);
+        setShowAlert(true);
+        toggleAlert();
+      }, 3000);
+      localStorage.setItem("microBlogUserName", userName);
+    } else if (userName === "") {
+      setIsError(true);
+      setTimeout(function() {
+        setIsError(false);
+      }, 3000);
+    }
   };
 
   const toggleAlert = () => {
@@ -87,10 +94,20 @@ function App() {
       <div>
         <nav className="navbar-wrapper">
           <div className="navbar">
-            <NavLink exact to="/" className="navbar-item" activeClassName="selected">
+            <NavLink
+              exact
+              to="/"
+              className="navbar-item"
+              activeClassName="selected"
+            >
               Home
             </NavLink>
-            <NavLink exact to="/profile" className="navbar-item" activeClassName="selected">
+            <NavLink
+              exact
+              to="/profile"
+              className="navbar-item"
+              activeClassName="selected"
+            >
               Profile
             </NavLink>
           </div>
