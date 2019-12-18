@@ -9,7 +9,6 @@ import {
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import AppContext from "./context/AppContext.js";
-// import { postMessage } from "./lib/api";
 import firebase from "./lib/firebase";
 
 function App() {
@@ -31,6 +30,7 @@ function App() {
   const successMessage = "User Name updated!";
 
   const updateLocalStorage = () => {
+    localStorage.clear();
     if (userName !== "") {
       setIsUpdatingName(true);
       setTimeout(function() {
@@ -61,7 +61,7 @@ function App() {
       timestampsInSnapshots: true
     });
     db.collection("messages")
-      .add({ userName: value })
+      .add(value)
       .then(function(docRef) {
         setInputValidity(true);
         setIsSpinning(false);

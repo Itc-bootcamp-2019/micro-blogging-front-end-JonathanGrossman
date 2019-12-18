@@ -10,7 +10,7 @@ const Form = () => {
   const handleChange = e => {
     const date = new Date();
     appContext.setContent(e.target.value);
-    appContext.setDate(date.toISOString());
+    appContext.setDate(date.getTime());
     validateInput();
   };
 

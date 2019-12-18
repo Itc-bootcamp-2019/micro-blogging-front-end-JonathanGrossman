@@ -10,13 +10,15 @@ const Posts = () => {
 
   return (
     <div className="posts">
+      {console.log(appContext.messagesArray)}
       {appContext.messagesArray !== null &&
         sortedMessagesArray(appContext.messagesArray).map(message => {
+          const displayDate = new Date(message.date).toISOString();
           return (
             <div key={message.date} className="posted-message">
               <div className="message-credentials">
                 <div>{message.userName}</div>
-                <div>{new Date(message.date).toISOString()}</div>
+                <div>{displayDate}</div>
               </div>
               {message.content}
             </div>
