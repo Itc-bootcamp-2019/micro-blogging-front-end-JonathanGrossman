@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import AppContext from "./context/AppContext.js";
 import firebase from "./lib/firebase";
 
@@ -114,6 +116,22 @@ function App() {
             >
               Profile
             </NavLink>
+            <NavLink
+              exact
+              to="/login"
+              className="navbar-item"
+              activeClassName="selected"
+            >
+              Login
+            </NavLink>
+            <NavLink
+              exact
+              to="/signup"
+              className="navbar-item"
+              activeClassName="selected"
+            >
+              Signup
+            </NavLink>
           </div>
         </nav>
 
@@ -153,6 +171,12 @@ function App() {
           >
             <Route exact path="/profile">
               <Profile />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
             </Route>
             <Route exact path="/">
               <Home />
