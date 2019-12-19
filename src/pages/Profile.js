@@ -6,7 +6,6 @@ import AppContext from "../context/AppContext";
 
 const Profile = () => {
   const appContext = useContext(AppContext);
-
   const handleChange = e => {
     appContext.setUserName(e.target.value);
   };
@@ -14,6 +13,7 @@ const Profile = () => {
     <div className="profile">
       <div className="page-title">Profile</div>
       <div className="page-subtitle">User Name</div>
+      })
       {appContext.showAlert && (
         <div className="alert-profile-updated">
           <Alert type="Success" />

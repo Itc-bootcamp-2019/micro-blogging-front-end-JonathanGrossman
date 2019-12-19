@@ -10,7 +10,6 @@ const Posts = () => {
 
   return (
     <div className="posts">
-      {console.log(appContext.messagesArray)}
       {appContext.messagesArray !== null &&
         sortedMessagesArray(appContext.messagesArray).map(message => {
           const displayDate = new Date(message.date).toISOString();

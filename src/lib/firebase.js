@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import firebaseui from "firebaseui";
 
 var firebaseConfig = {
   apiKey: "AIzaSyAnVx0KuZPUAymjo7W2nck-qn7I3SVAugk",

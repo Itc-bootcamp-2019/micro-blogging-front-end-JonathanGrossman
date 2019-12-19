@@ -1,9 +1,10 @@
 import React from "react";
+import { withRouter } from "react-router";
 import { Formik } from "formik";
-import firebase from "firebase/app";
+import firebase from "../lib/firebase";
 import "firebase/auth";
 
-const Signup = () => (
+const Signup = ({ history }) => (
   <div>
     <Formik
       initialValues={{
@@ -45,12 +46,16 @@ const Signup = () => (
           firebase
             .auth()
             .createUserWithEmailAndPassword(values.email, values.password)
-            .catch(function(error) {
-              // Handle Errors here.
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              // ...
-            });
+            .then(history.push("/"))
+            .catch(
+              function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+              },
+              [history]
+            );
           setSubmitting(false);
         }, 400);
       }}
@@ -137,4 +142,4 @@ const Signup = () => (
   </div>
 );
 
-export default Signup;
+export default withRouter(Signup);

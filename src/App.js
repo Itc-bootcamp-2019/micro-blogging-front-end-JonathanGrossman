@@ -10,8 +10,10 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import AppContext from "./context/AppContext.js";
+import AppContext from "./context/AppContext";
 import firebase from "./lib/firebase";
+import AuthProvider from "./auth/Auth";
+import PrivateRoute from "./auth/PrivateRoute";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -95,96 +97,99 @@ function App() {
       setUserName(savedName);
     }
   }, [savedName]);
-  return (
-    <Router>
-      <div>
-        <nav className="navbar-wrapper">
-          <div className="navbar">
-            <NavLink
-              exact
-              to="/"
-              className="navbar-item"
-              activeClassName="selected"
-            >
-              Home
-            </NavLink>
-            <NavLink
-              exact
-              to="/profile"
-              className="navbar-item"
-              activeClassName="selected"
-            >
-              Profile
-            </NavLink>
-            <NavLink
-              exact
-              to="/login"
-              className="navbar-item"
-              activeClassName="selected"
-            >
-              Login
-            </NavLink>
-            <NavLink
-              exact
-              to="/signup"
-              className="navbar-item"
-              activeClassName="selected"
-            >
-              Signup
-            </NavLink>
-          </div>
-        </nav>
 
-        <Switch>
-          <AppContext.Provider
-            value={{
-              userName,
-              setUserName,
-              isInputValid,
-              setInputValidity,
-              isSpinning,
-              setIsSpinning,
-              isError,
-              setIsError,
-              errorMessage,
-              setErrorMessage,
-              successMessage,
-              messagesArray,
-              setMessagesArray,
-              content,
-              setContent,
-              date,
-              setDate,
-              addMessageToArray,
-              submitMessage,
-              isUpdatingName,
-              setIsUpdatingName,
-              showAlert,
-              setShowAlert,
-              buttonClass,
-              setButtonClass,
-              updateLocalStorage,
-              toggleAlert,
-              applyThisClass,
-              setApplyThisClass
-            }}
-          >
-            <Route exact path="/profile">
-              <Profile />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </AppContext.Provider>
-        </Switch>
-      </div>
-    </Router>
+  return (
+    <AuthProvider>
+      <Router>
+        <div>
+          <nav className="navbar-wrapper">
+            <div className="navbar">
+              <NavLink
+                exact
+                to="/"
+                className="navbar-item"
+                activeClassName="selected"
+              >
+                Home
+              </NavLink>
+              <NavLink
+                exact
+                to="/profile"
+                className="navbar-item"
+                activeClassName="selected"
+              >
+                Profile
+              </NavLink>
+              <NavLink
+                exact
+                to="/login"
+                className="navbar-item"
+                activeClassName="selected"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                exact
+                to="/signup"
+                className="navbar-item"
+                activeClassName="selected"
+              >
+                Signup
+              </NavLink>
+            </div>
+          </nav>
+
+          <Switch>
+            <AppContext.Provider
+              value={{
+                userName,
+                setUserName,
+                isInputValid,
+                setInputValidity,
+                isSpinning,
+                setIsSpinning,
+                isError,
+                setIsError,
+                errorMessage,
+                setErrorMessage,
+                successMessage,
+                messagesArray,
+                setMessagesArray,
+                content,
+                setContent,
+                date,
+                setDate,
+                addMessageToArray,
+                submitMessage,
+                isUpdatingName,
+                setIsUpdatingName,
+                showAlert,
+                setShowAlert,
+                buttonClass,
+                setButtonClass,
+                updateLocalStorage,
+                toggleAlert,
+                applyThisClass,
+                setApplyThisClass
+              }}
+            >
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/signup">
+                <Signup />
+              </Route>
+              <Route exact path="/">
+                <Home />
+              </Route>
+            </AppContext.Provider>
+          </Switch>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 

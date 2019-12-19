@@ -24,9 +24,7 @@ const Home = () => {
             array.push(messageObject);
           });
           appContext.setMessagesArray(array);
-          console.log(appContext.messagesArray);
         });
-      
     }, 2000);
   });
 
