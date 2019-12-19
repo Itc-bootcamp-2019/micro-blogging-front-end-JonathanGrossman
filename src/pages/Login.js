@@ -14,6 +14,12 @@ const Login = () => (
         ) {
           errors.email = "Invalid email address";
         }
+
+        if (!values.password) {
+          errors.password = "Required";
+        } else if (values.password.length < 6) {
+          errors.password = "Password must be at least 6 characters";
+        }
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
@@ -37,26 +43,34 @@ const Login = () => (
           <div className="page-title">Login</div>
           <div className="page-subtitle">Welcome back</div>
           <form onSubmit={handleSubmit} className="form-input-wrapper">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-              className="auth-input"
-            />
-            {errors.email && touched.email && errors.email}
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-              className="auth-input"
-            />
-            {errors.password && touched.password && errors.password}
+            <div className="input-and-error-wrapper">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                className="auth-input"
+              />
+              <div className="input-error-alert">
+                {errors.email && touched.email && errors.email}
+              </div>
+            </div>
+            <div className="input-and-error-wrapper">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                className="auth-input"
+              />
+              <div className="input-error-alert">
+                {errors.password && touched.password && errors.password}
+              </div>
+            </div>
             <button type="submit" disabled={isSubmitting} className="button">
               Login
             </button>

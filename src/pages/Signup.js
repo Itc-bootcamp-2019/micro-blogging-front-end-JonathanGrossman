@@ -4,9 +4,18 @@ import { Formik } from "formik";
 const Signup = () => (
   <div>
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{
+        username: "",
+        email: "",
+        password: "",
+        confirmpassword: ""
+      }}
       validate={values => {
         const errors = {};
+        if (!values.username) {
+          errors.username = "Required";
+        }
+
         if (!values.email) {
           errors.email = "Required";
         } else if (
@@ -14,6 +23,19 @@ const Signup = () => (
         ) {
           errors.email = "Invalid email address";
         }
+
+        if (!values.password) {
+          errors.password = "Required";
+        } else if (values.password.length < 6) {
+          errors.password = "Password must be at least 6 characters";
+        }
+
+        if (!values.confirmpassword) {
+          errors.confirmpassword = "Required";
+        } else if (values.password !== values.confirmpassword) {
+          errors.confirmpassword = "Must match password";
+        }
+
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
@@ -37,48 +59,64 @@ const Signup = () => (
           <div className="page-title">Signup</div>
           <div className="page-subtitle">Please enter your information</div>
           <form onSubmit={handleSubmit} className="form-input-wrapper">
-            <input
-              type="username"
-              name="username"
-              placeholder="Username"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.username}
-              className="auth-input"
-            />
-            {errors.username && touched.username && errors.username}
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-              className="auth-input"
-            />
-            {errors.email && touched.email && errors.email}
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-              className="auth-input"
-            />
-            {errors.password && touched.password && errors.password}
-            <input
-              type="password"
-              name="confrmpassword"
-              placeholder="Confirm Password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.confirmpassword}
-              className="auth-input"
-            />
-            {errors.confirmpassword &&
-              touched.confirmpassword &&
-              errors.confirmpassword}
+            <div className="input-and-error-wrapper">
+              <input
+                type="username"
+                name="username"
+                placeholder="Username"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.username}
+                className="auth-input"
+              />
+              <div className="input-error-alert">
+                {errors.username && touched.username && errors.username}
+              </div>
+            </div>
+            <div className="input-and-error-wrapper">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                className="auth-input"
+              />
+              <div className="input-error-alert">
+                {errors.email && touched.email && errors.email}
+              </div>
+            </div>
+            <div className="input-and-error-wrapper">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                className="auth-input"
+              />
+              <div className="input-error-alert">
+                {errors.password && touched.password && errors.password}
+              </div>
+            </div>
+            <div className="input-and-error-wrapper">
+              <input
+                type="password"
+                name="confirmpassword"
+                placeholder="Confirm Password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.confirmpassword}
+                className="auth-input"
+              />
+              <div className="input-error-alert">
+                {errors.confirmpassword &&
+                  touched.confirmpassword &&
+                  errors.confirmpassword}
+              </div>
+            </div>
             <button type="submit" disabled={isSubmitting} className="button">
               Signup
             </button>

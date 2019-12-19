@@ -268,9 +268,18 @@ body {
   background: #15202b;
   width: 45vw;
   height: 61px;
-  margin-bottom: 20px;
   border: 2px solid #cccccc;
   box-sizing: border-box;
   border-radius: 6px;
   padding: 20px 15px;
+}
+
+.input-and-error-wrapper {
+  padding-bottom: 20px;
+}
+
+.input-error-alert {
+  font-size: 12px;
+  color: #cccccc;
+  margin: 2px;
 }
