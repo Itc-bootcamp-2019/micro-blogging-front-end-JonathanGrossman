@@ -1,5 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 const Signup = () => (
   <div>
@@ -40,7 +42,15 @@ const Signup = () => (
       }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
+          firebase
+            .auth()
+            .createUserWithEmailAndPassword(values.email, values.password)
+            .catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // ...
+            });
           setSubmitting(false);
         }, 400);
       }}

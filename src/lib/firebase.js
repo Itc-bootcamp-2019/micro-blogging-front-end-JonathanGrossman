@@ -1,7 +1,8 @@
 import firebase from "firebase";
+import firebaseui from "firebaseui";
 
 var firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
+  apiKey: "AIzaSyAnVx0KuZPUAymjo7W2nck-qn7I3SVAugk",
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_DATABASE_URL,
   projectId: "portfolio-641ec",
