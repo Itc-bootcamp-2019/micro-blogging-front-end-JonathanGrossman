@@ -12,8 +12,8 @@ const Profile = () => {
   };
   return (
     <div className="profile">
-      <div className="profile-title">Profile</div>
-      <div className="username-title">User Name</div>
+      <div className="page-title">Profile</div>
+      <div className="page-subtitle">User Name</div>
       {appContext.showAlert && (
         <div className="alert-profile-updated">
           <Alert type="Success" />

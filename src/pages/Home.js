@@ -28,15 +28,6 @@ const Home = () => {
         });
       
     }, 2000);
-
-    // setTimeout(function() {
-    //   getMessages().then(
-    //     response =>
-    //       {if (response.status === 200) {
-    //       appContext.setMessagesArray(response.data.tweets)}
-    //     }
-    //   );
-    // }, 2000);
   });
 
   useEffect(() => {
