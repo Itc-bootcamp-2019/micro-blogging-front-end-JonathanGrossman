@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
+import React, { useState, useEffect, useContext } from "react";
+import { Redirect } from "react-router";
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +14,8 @@ import AppContext from "./context/AppContext";
 import firebase from "./lib/firebase";
 import AuthProvider from "./auth/Auth";
 import PrivateRoute from "./auth/PrivateRoute";
+import { AuthContext } from "./auth/Auth";
+import "./App.css";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -98,6 +100,12 @@ function App() {
     }
   }, [savedName]);
 
+  const currentUser = useContext(AuthContext);
+  if (currentUser) {
+    // firebase.auth().signOut()
+    return <Redirect to="/" />;
+  }
+
   return (
     <AuthProvider>
       <Router>
@@ -173,18 +181,10 @@ function App() {
                 setApplyThisClass
               }}
             >
-              <Route exact path="/profile">
-                <Profile />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-              <Route exact path="/signup">
-                <Signup />
-              </Route>
-              <Route exact path="/">
-                <Home />
-              </Route>
+              <PrivateRoute exact path="/profile" component={Profile} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <PrivateRoute exact path="/" component={Home} />
             </AppContext.Provider>
           </Switch>
         </div>

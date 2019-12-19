@@ -3,14 +3,12 @@ import { withRouter, Redirect } from "react-router";
 import { Formik } from "formik";
 import firebase from "../lib/firebase";
 import "firebase/auth";
-import { AuthContext } from "../auth/Auth.js";
+import { AuthContext } from "../auth/Auth";
 
 const Login = ({ history }) => {
   const currentUser = useContext(AuthContext);
-  console.log(currentUser);
-
   if (currentUser) {
-    // firebase.auth().signOut()
+    // firebase.auth().signOut();
     return <Redirect to="/" />;
   }
   return (
