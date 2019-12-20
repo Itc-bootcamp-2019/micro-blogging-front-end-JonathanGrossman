@@ -4,16 +4,55 @@ import { Formik } from "formik";
 import firebase from "../lib/firebase";
 import "firebase/auth";
 import { AuthContext } from "../auth/Auth";
+import AppContext from "../context/AppContext";
+import GoogleLogin from "react-google-login";
 
 const Login = ({ history }) => {
+  const appContext = useContext(AppContext);
   const currentUser = useContext(AuthContext);
+  const setCurrentUser = useContext(AuthContext);
+
+  const createNewUser = profile => {
+    const db = firebase.firestore();
+    db.settings({
+      timestampsInSnapshots: true
+    });
+    db.collection("users")
+      .add(profile)
+      .then(function(docRef) {})
+      .catch(function(error) {});
+  };
+  const responseGoogle = response => {
+    const db = firebase.firestore();
+    db.collection("users")
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          if (response.profileObj !== undefined) {
+            if (response.profileObj.email === doc.data().email) {
+              appContext.setUserName(doc.data().name);
+              appContext.setUserEmail(doc.data().email);
+              // setCurrentUser;
+              history.push("/");
+              return;
+            } else {
+              createNewUser(response.profileObj);
+              appContext.setUserName(response.profileObj.name);
+              appContext.setUserEmail(response.profileObj.email);
+              // setCurrentUser();
+              history.push("/");
+            }
+          }
+        });
+      });
+  };
+
   if (currentUser) {
     // firebase.auth().signOut();
     return <Redirect to="/" />;
   }
   return (
     <div>
-      (
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={values => {
@@ -35,10 +74,26 @@ const Login = ({ history }) => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
+            const db = firebase.firestore();
             firebase
               .auth()
               .signInWithEmailAndPassword(values.email, values.password)
-              .then(history.push("/"))
+              .then(
+                db
+                  .collection("users")
+                  .get()
+                  .then(function(querySnapshot) {
+                    querySnapshot.forEach(function(doc) {
+                      if (values.email === doc.data().email) {
+                        appContext.setUserName(doc.data().name);
+                        appContext.setUserEmail(doc.data().email);
+                        setCurrentUser();
+                        history.push("/");
+                        return;
+                      }
+                    });
+                  })
+              )
               .catch(
                 function(error) {
                   // Handle Errors here.
@@ -101,7 +156,14 @@ const Login = ({ history }) => {
           </div>
         )}
       </Formik>
-      )
+      Login with Google
+      <GoogleLogin
+        clientId="518301849504-dkflm31p6b2692tb8n5052huqrhujnsa.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={"single_host_origin"}
+      />
     </div>
   );
 };

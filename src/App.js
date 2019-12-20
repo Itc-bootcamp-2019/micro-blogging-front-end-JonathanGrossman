@@ -19,6 +19,7 @@ import "./App.css";
 
 function App() {
   const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const savedName = localStorage.getItem("microBlogUserName");
   const [isInputValid, setInputValidity] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
@@ -36,21 +37,20 @@ function App() {
   const successMessage = "User Name updated!";
 
   const updateLocalStorage = () => {
-    localStorage.clear();
-    if (userName !== "") {
-      setIsUpdatingName(true);
-      setTimeout(function() {
-        setIsUpdatingName(false);
-        setShowAlert(true);
-        toggleAlert();
-      }, 3000);
-      localStorage.setItem("microBlogUserName", userName);
-    } else if (userName === "") {
-      setIsError(true);
-      setTimeout(function() {
-        setIsError(false);
-      }, 3000);
-    }
+    // if (userName !== "") {
+    //   setIsUpdatingName(true);
+    //   setTimeout(function() {
+    //     setIsUpdatingName(false);
+    //     setShowAlert(true);
+    //     toggleAlert();
+    //   }, 3000);
+    //   localStorage.setItem("microBlogUserName", userName);
+    // } else if (userName === "") {
+    //   setIsError(true);
+    //   setTimeout(function() {
+    //     setIsError(false);
+    //   }, 3000);
+    // }
   };
 
   const toggleAlert = () => {
@@ -92,13 +92,13 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    if (savedName === "undefined" || savedName === null) {
-      setUserName("User Name");
-    } else {
-      setUserName(savedName);
-    }
-  }, [savedName]);
+  // useEffect(() => {
+  //   if (savedName === "undefined" || savedName === null) {
+  //     setUserName("User Name");
+  //   } else {
+  //     setUserName(savedName);
+  //   }
+  // }, [savedName]);
 
   const currentUser = useContext(AuthContext);
   if (currentUser) {
@@ -152,6 +152,8 @@ function App() {
               value={{
                 userName,
                 setUserName,
+                userEmail,
+                setUserEmail,
                 isInputValid,
                 setInputValidity,
                 isSpinning,
