@@ -4,9 +4,12 @@ import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
 import AppContext from "../context/AppContext";
 import firebase from "../lib/firebase";
+import { AuthContext } from "../auth/Auth";
 
 const Profile = () => {
   const appContext = useContext(AppContext);
+  const currentUser = useContext(AuthContext);
+
   const handleChange = e => {
     appContext.setUserName(e.target.value);
   };

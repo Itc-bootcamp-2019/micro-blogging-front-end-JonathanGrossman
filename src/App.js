@@ -34,6 +34,7 @@ function App() {
     "message-button-home submit-button-off"
   );
   const successMessage = "User Name updated!";
+  const currentUser = useContext(AuthContext);
 
   const updateLocalStorage = () => {
     localStorage.clear();
@@ -99,12 +100,6 @@ function App() {
       setUserName(savedName);
     }
   }, [savedName]);
-
-  const currentUser = useContext(AuthContext);
-  if (currentUser) {
-    // firebase.auth().signOut()
-    return <Redirect to="/" />;
-  }
 
   return (
     <AuthProvider>
