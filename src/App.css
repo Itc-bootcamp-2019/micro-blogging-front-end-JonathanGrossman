@@ -239,6 +239,13 @@ body {
   top: 282px;
 }
 
+.logout-button-profile {
+  background: #343a40;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
 .alert-profile-updated {
   position: absolute;
   left: 59vw;

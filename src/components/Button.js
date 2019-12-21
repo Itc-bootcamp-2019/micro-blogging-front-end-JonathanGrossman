@@ -15,7 +15,8 @@ const Button = props => {
       appContext.setButtonClass("message-button-home submit-button-on");
     } else if (!appContext.isInputValid && type === "Tweet") {
       appContext.setButtonClass("message-button-home submit-button-off");
-    } else if (type === "Save") {
+    }
+    if (type === "Save") {
       appContext.setButtonClass("input-button-profile");
     }
   };

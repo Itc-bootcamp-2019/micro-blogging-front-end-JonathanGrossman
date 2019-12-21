@@ -3,17 +3,21 @@ import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
 import AppContext from "../context/AppContext";
+import firebase from "../lib/firebase";
 
 const Profile = () => {
   const appContext = useContext(AppContext);
   const handleChange = e => {
     appContext.setUserName(e.target.value);
   };
+  const logout = () => {
+    firebase.auth().signOut();
+  };
   return (
     <div className="profile">
       <div className="page-title">Profile</div>
       <div className="page-subtitle">User Name</div>
-      })
+
       {appContext.showAlert && (
         <div className="alert-profile-updated">
           <Alert type="Success" />
@@ -38,6 +42,9 @@ const Profile = () => {
         )}
         {!appContext.isUpdatingName && <Button type="Save" />}
       </div>
+      <button className="button logout-button-profile" onClick={logout}>
+        Logout
+      </button>
     </div>
   );
 };

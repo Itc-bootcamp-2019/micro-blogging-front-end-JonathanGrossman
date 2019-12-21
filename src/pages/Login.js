@@ -8,7 +8,6 @@ import { AuthContext } from "../auth/Auth";
 const Login = ({ history }) => {
   const currentUser = useContext(AuthContext);
   if (currentUser) {
-    firebase.auth().signOut();
     return <Redirect to="/" />;
   }
   return (

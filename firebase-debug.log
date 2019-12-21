@@ -1,0 +1,77 @@
+[debug] [2019-12-21T17:41:34.111Z] ----------------------------------------------------------------------
+[debug] [2019-12-21T17:41:34.115Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-12-21T17:41:34.116Z] CLI Version:   7.10.0
+[debug] [2019-12-21T17:41:34.116Z] Platform:      darwin
+[debug] [2019-12-21T17:41:34.116Z] Node Version:  v10.15.2
+[debug] [2019-12-21T17:41:34.126Z] Time:          Sat Dec 21 2019 11:41:34 GMT-0600 (Central Standard Time)
+[debug] [2019-12-21T17:41:34.127Z] ----------------------------------------------------------------------
+[debug] [2019-12-21T17:41:34.127Z] 
+[debug] [2019-12-21T17:41:34.157Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-21T17:41:34.157Z] > authorizing via signed-in user
+[debug] [2019-12-21T17:41:34.157Z] [iam] checking project portfolio-641ec for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-12-21T17:41:34.160Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-641ec:testIamPermissions  
+
+[debug] [2019-12-21T17:42:41.617Z] ----------------------------------------------------------------------
+[debug] [2019-12-21T17:42:41.619Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-12-21T17:42:41.620Z] CLI Version:   7.10.0
+[debug] [2019-12-21T17:42:41.620Z] Platform:      darwin
+[debug] [2019-12-21T17:42:41.620Z] Node Version:  v10.15.2
+[debug] [2019-12-21T17:42:41.621Z] Time:          Sat Dec 21 2019 11:42:41 GMT-0600 (Central Standard Time)
+[debug] [2019-12-21T17:42:41.621Z] ----------------------------------------------------------------------
+[debug] [2019-12-21T17:42:41.621Z] 
+[debug] [2019-12-21T17:42:41.639Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-21T17:42:41.639Z] > authorizing via signed-in user
+[debug] [2019-12-21T17:42:41.640Z] [iam] checking project portfolio-641ec for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-12-21T17:42:41.642Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-641ec:testIamPermissions  
+
+[debug] [2019-12-21T17:43:57.809Z] Error: connect ETIMEDOUT 212.199.240.56:443
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1104:14)
+[error] 
+[error] Error: Server Error. connect ETIMEDOUT 212.199.240.56:443
+[debug] [2019-12-21T17:44:04.855Z] ----------------------------------------------------------------------
+[debug] [2019-12-21T17:44:04.858Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-12-21T17:44:04.858Z] CLI Version:   7.10.0
+[debug] [2019-12-21T17:44:04.858Z] Platform:      darwin
+[debug] [2019-12-21T17:44:04.858Z] Node Version:  v10.15.2
+[debug] [2019-12-21T17:44:04.859Z] Time:          Sat Dec 21 2019 11:44:04 GMT-0600 (Central Standard Time)
+[debug] [2019-12-21T17:44:04.860Z] ----------------------------------------------------------------------
+[debug] [2019-12-21T17:44:04.860Z] 
+[debug] [2019-12-21T17:44:04.876Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-21T17:44:04.877Z] > authorizing via signed-in user
+[debug] [2019-12-21T17:44:04.877Z] [iam] checking project portfolio-641ec for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-12-21T17:44:04.880Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-641ec:testIamPermissions  
+
+[debug] [2019-12-21T17:45:20.796Z] Error: connect ETIMEDOUT 212.199.240.56:443
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1104:14)
+[error] 
+[error] Error: Server Error. connect ETIMEDOUT 212.199.240.56:443
+[debug] [2019-12-21T17:46:16.899Z] ----------------------------------------------------------------------
+[debug] [2019-12-21T17:46:16.901Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-12-21T17:46:16.902Z] CLI Version:   7.10.0
+[debug] [2019-12-21T17:46:16.902Z] Platform:      darwin
+[debug] [2019-12-21T17:46:16.902Z] Node Version:  v10.15.2
+[debug] [2019-12-21T17:46:16.904Z] Time:          Sat Dec 21 2019 11:46:16 GMT-0600 (Central Standard Time)
+[debug] [2019-12-21T17:46:16.904Z] ----------------------------------------------------------------------
+[debug] [2019-12-21T17:46:16.904Z] 
+[debug] [2019-12-21T17:46:16.920Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-21T17:46:16.920Z] > authorizing via signed-in user
+[debug] [2019-12-21T17:46:16.921Z] [iam] checking project portfolio-641ec for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-12-21T17:46:16.924Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-641ec:testIamPermissions  
+
+[debug] [2019-12-21T17:47:28.705Z] ----------------------------------------------------------------------
+[debug] [2019-12-21T17:47:28.708Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-12-21T17:47:28.709Z] CLI Version:   7.10.0
+[debug] [2019-12-21T17:47:28.709Z] Platform:      darwin
+[debug] [2019-12-21T17:47:28.709Z] Node Version:  v10.15.2
+[debug] [2019-12-21T17:47:28.710Z] Time:          Sat Dec 21 2019 11:47:28 GMT-0600 (Central Standard Time)
+[debug] [2019-12-21T17:47:28.710Z] ----------------------------------------------------------------------
+[debug] [2019-12-21T17:47:28.710Z] 
+[debug] [2019-12-21T17:47:28.732Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-21T17:47:28.732Z] > authorizing via signed-in user
+[debug] [2019-12-21T17:47:28.732Z] [iam] checking project portfolio-641ec for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-12-21T17:47:28.735Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-641ec:testIamPermissions  
+
+[debug] [2019-12-21T17:48:44.966Z] Error: connect ETIMEDOUT 212.199.240.56:443
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1104:14)
+[error] 
+[error] Error: Server Error. connect ETIMEDOUT 212.199.240.56:443
