@@ -14,6 +14,7 @@ const Profile = () => {
     appContext.setUserName(e.target.value);
   };
   const logout = () => {
+    appContext.setSignedInUser(null);
     firebase.auth().signOut();
   };
   return (

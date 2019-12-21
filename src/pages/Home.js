@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useCallback } from "react";
 import Form from "../components/Form";
 import Posts from "../components/Posts";
-// import { getMessages } from "../lib/api";
 import AppContext from "../context/AppContext";
 import firebase from "../lib/firebase";
 

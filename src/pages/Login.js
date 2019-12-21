@@ -4,11 +4,15 @@ import { Formik } from "formik";
 import firebase from "../lib/firebase";
 import "firebase/auth";
 import { AuthContext } from "../auth/Auth";
+import AppContext from "../context/AppContext";
+import { app } from "firebase";
 
 const Login = ({ history }) => {
+  const appContext = useContext(AppContext);
   const currentUser = useContext(AuthContext);
 
   if (currentUser) {
+    appContext.setSignedInUser(currentUser);
     return <Redirect to="/" />;
   }
   return (

@@ -18,7 +18,9 @@ import { AuthContext } from "./auth/Auth";
 import "./App.css";
 
 function App() {
+  const [signedInUser, setSignedInUser] = useState(null);
   const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const savedName = localStorage.getItem("microBlogUserName");
   const [isInputValid, setInputValidity] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
@@ -99,7 +101,7 @@ function App() {
     } else {
       setUserName(savedName);
     }
-  }, [savedName]);
+  }, [currentUser, savedName]);
 
   return (
     <AuthProvider>
@@ -107,46 +109,54 @@ function App() {
         <div>
           <nav className="navbar-wrapper">
             <div className="navbar">
-              <NavLink
-                exact
-                to="/"
-                className="navbar-item"
-                activeClassName="selected"
-              >
-                Home
-              </NavLink>
-              <NavLink
-                exact
-                to="/profile"
-                className="navbar-item"
-                activeClassName="selected"
-              >
-                Profile
-              </NavLink>
-              <NavLink
+              {signedInUser && (
+                <NavLink
+                  exact
+                  to="/"
+                  className="navbar-item"
+                  activeClassName="selected"
+                >
+                  Home
+                </NavLink>
+              )}
+              {signedInUser && (
+                <NavLink
+                  exact
+                  to="/profile"
+                  className="navbar-item"
+                  activeClassName="selected"
+                >
+                  Profile
+                </NavLink>
+              )}
+              {!signedInUser && <NavLink
                 exact
                 to="/login"
                 className="navbar-item"
                 activeClassName="selected"
               >
                 Login
-              </NavLink>
-              <NavLink
+              </NavLink>}
+              {!signedInUser &&<NavLink
                 exact
                 to="/signup"
                 className="navbar-item"
                 activeClassName="selected"
               >
                 Signup
-              </NavLink>
+              </NavLink>}
             </div>
           </nav>
 
           <Switch>
             <AppContext.Provider
               value={{
+                signedInUser,
+                setSignedInUser,
                 userName,
                 setUserName,
+                userEmail,
+                setUserEmail,
                 isInputValid,
                 setInputValidity,
                 isSpinning,

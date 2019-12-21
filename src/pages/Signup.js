@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { withRouter } from "react-router";
 import { Formik } from "formik";
 import firebase from "../lib/firebase";
 import "firebase/auth";
+import AppContext from "../context/AppContext";
+
 import uuid from "uuidv4";
 
 const Signup = ({ history }) => {
+  const appContext = useContext(AppContext);
   const db = firebase.firestore();
   return (
     <div>
@@ -58,6 +61,8 @@ const Signup = ({ history }) => {
                   .collection("users")
                   .add({ name: values.username, email: values.email })
                   .then(function(docRef) {
+                    appContext.setUserName(values.setUserName);
+                    appContext.setUserEmail(values.setUserEmail);
                     history.push("/");
                   })
                   .catch(function(error) {
