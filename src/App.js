@@ -39,21 +39,20 @@ function App() {
   const currentUser = useContext(AuthContext);
 
   const updateLocalStorage = () => {
-    localStorage.clear();
-    if (userName !== "") {
-      setIsUpdatingName(true);
-      setTimeout(function() {
-        setIsUpdatingName(false);
-        setShowAlert(true);
-        toggleAlert();
-      }, 3000);
-      localStorage.setItem("microBlogUserName", userName);
-    } else if (userName === "") {
-      setIsError(true);
-      setTimeout(function() {
-        setIsError(false);
-      }, 3000);
-    }
+    // if (userName !== "") {
+    //   setIsUpdatingName(true);
+    //   setTimeout(function() {
+    //     setIsUpdatingName(false);
+    //     setShowAlert(true);
+    //     toggleAlert();
+    //   }, 3000);
+    //   localStorage.setItem("microBlogUserName", userName);
+    // } else if (userName === "") {
+    //   setIsError(true);
+    //   setTimeout(function() {
+    //     setIsError(false);
+    //   }, 3000);
+    // }
   };
 
   const toggleAlert = () => {
@@ -95,13 +94,13 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    if (savedName === "undefined" || savedName === null) {
-      setUserName("User Name");
-    } else {
-      setUserName(savedName);
-    }
-  }, [currentUser, savedName]);
+  // useEffect(() => {
+  //   if (savedName === "undefined" || savedName === null) {
+  //     setUserName("User Name");
+  //   } else {
+  //     setUserName(savedName);
+  //   }
+  // }, [currentUser, savedName]);
 
   return (
     <AuthProvider>
@@ -129,22 +128,26 @@ function App() {
                   Profile
                 </NavLink>
               )}
-              {!signedInUser && <NavLink
-                exact
-                to="/login"
-                className="navbar-item"
-                activeClassName="selected"
-              >
-                Login
-              </NavLink>}
-              {!signedInUser &&<NavLink
-                exact
-                to="/signup"
-                className="navbar-item"
-                activeClassName="selected"
-              >
-                Signup
-              </NavLink>}
+              {!signedInUser && (
+                <NavLink
+                  exact
+                  to="/login"
+                  className="navbar-item"
+                  activeClassName="selected"
+                >
+                  Login
+                </NavLink>
+              )}
+              {!signedInUser && (
+                <NavLink
+                  exact
+                  to="/signup"
+                  className="navbar-item"
+                  activeClassName="selected"
+                >
+                  Signup
+                </NavLink>
+              )}
             </div>
           </nav>
 

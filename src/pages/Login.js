@@ -13,6 +13,18 @@ const Login = ({ history }) => {
 
   if (currentUser) {
     appContext.setSignedInUser(currentUser);
+    const db = firebase.firestore();
+    db.collection("users")
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          if (currentUser.email === doc.data().email) {
+            appContext.setUserName(doc.data().name);
+            appContext.setUserEmail(doc.data().email);
+          }
+        });
+      });
+
     return <Redirect to="/" />;
   }
   return (
