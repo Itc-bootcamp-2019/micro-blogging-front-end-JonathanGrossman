@@ -6,7 +6,6 @@ import AppContext from "../context/AppContext";
 
 const Profile = () => {
   const appContext = useContext(AppContext);
-  console.log(appContext.userName)
   const handleChange = e => {
     appContext.setUserName(e.target.value);
   };

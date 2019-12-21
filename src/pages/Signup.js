@@ -46,11 +46,7 @@ const Signup = ({ history }) => (
           firebase
             .auth()
             .createUserWithEmailAndPassword(values.email, values.password)
-            .then(
-              // if no matches, then create a new user object in firebase for this user
-              // then add this new user info to state
-              history.push("/")
-            )
+            .then(history.push("/"))
             .catch(
               function(error) {
                 // Handle Errors here.

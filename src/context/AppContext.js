@@ -3,8 +3,6 @@ import React from "react";
 const MyAppContext = React.createContext({
   userName: "",
   setUserName: "",
-  userEmail: "",
-  setUserEmail: "",
   isInputValid: "",
   setInputValidity: "",
   isSpinning: "",
