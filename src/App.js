@@ -86,8 +86,7 @@ function App() {
     db.collection("messages")
       .add(value)
       .then(function(docRef) {
-        db.ref()
-          .child("messages")
+        db.collection("messages")
           .doc(docRef.id)
           .update({ id: docRef.id });
         setInputValidity(true);
