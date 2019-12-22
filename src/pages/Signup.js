@@ -61,6 +61,9 @@ const Signup = ({ history }) => {
                   .collection("users")
                   .add({ name: values.username, email: values.email })
                   .then(function(docRef) {
+                    db.collection("users")
+                      .doc(docRef.id)
+                      .update({ id: docRef.id });
                     appContext.setUserName(values.setUserName);
                     appContext.setUserEmail(values.setUserEmail);
                     history.push("/");
