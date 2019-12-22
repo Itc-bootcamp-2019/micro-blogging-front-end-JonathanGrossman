@@ -127,20 +127,6 @@ body {
   margin-bottom: 20px;
 }
 
-.profile-spinner {
-  position: absolute;
-  left: 67vw;
-  top: 282px;
-  height: 34px;
-  width: 68px;
-}
-
-.login-spinner {
-  position: absolute;
-  height: 34px;
-  width: 40px;
-}
-
 .spinner {
   position: absolute;
   bottom: 0;
@@ -159,6 +145,27 @@ body {
   -webkit-animation: loader2 2s ease-in-out infinite alternate;
   animation: loader2 2s ease-in-out infinite alternate;
 }
+
+.profile-spinner {
+  position: absolute;
+  left: 67vw;
+  top: 503px;
+  height: 34px;
+  width: 68px;
+}
+
+.login-spinner {
+  position: absolute;
+  height: 34px;
+  width: 40px;
+}
+
+.user-photo-spinner {
+  position: absolute;
+  bottom: 50px;
+  right: 55px;
+}
+
 @keyframes loader2 {
   from {
     transform: rotate(0deg);
@@ -300,7 +307,7 @@ body {
 .alert-profile-updated {
   position: absolute;
   left: 59vw;
-  top: 155px;
+  top: 385px;
   height: 34px;
 }
 

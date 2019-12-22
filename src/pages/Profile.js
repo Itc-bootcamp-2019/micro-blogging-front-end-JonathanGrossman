@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
@@ -8,6 +8,7 @@ import { storage } from "../lib/firebase";
 
 const Profile = () => {
   const appContext = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChangeImage = e => {
     if (e.target.files[0]) {
@@ -17,6 +18,7 @@ const Profile = () => {
   };
 
   const handleUpload = () => {
+    setIsLoading(true);
     const uploadTask = storage
       .ref(`images/${appContext.profileImage.name}`)
       .put(appContext.profileImage);
@@ -40,10 +42,12 @@ const Profile = () => {
               .get()
               .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
-                  if (appContext.userEmail === doc.data().email)
+                  if (appContext.userEmail === doc.data().email) {
                     db.collection("users")
                       .doc(doc.data().id)
                       .update({ image: urlForSetting });
+                    setIsLoading(false);
+                  }
                 });
               });
           });
@@ -60,11 +64,22 @@ const Profile = () => {
   return (
     <div className="profile">
       <div className="page-title">Profile</div>
-      <img
-        src={appContext.urlProfileImage || "http://via.placeholder.com/400x300"}
-        alt="user"
-        className="user-photo"
-      />
+      {!isLoading && (
+        <img
+          src={
+            appContext.urlProfileImage || "http://via.placeholder.com/400x300"
+          }
+          alt="user"
+          className="user-photo"
+        />
+      )}
+      {isLoading && (
+        <div className="user-photo">
+          <div className="user-photo-spinner">
+            <Spinner />
+          </div>
+        </div>
+      )}
       <div className="photo-button-wrapper">
         <label
           htmlFor="upload-photo"
