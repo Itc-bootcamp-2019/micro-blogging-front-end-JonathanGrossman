@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import "firebase/storage";
 
-// var firebaseConfig = {
+// const firebaseConfig = {
 //   apiKey: "AIzaSyAnVx0KuZPUAymjo7W2nck-qn7I3SVAugk",
 //   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
 //   databaseURL: process.env.REACT_APP_DATABASE_URL,
@@ -13,7 +13,7 @@ import "firebase/storage";
 // };
 
 // Your web app's Firebase configuration
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyDsT4upNYwUwt6UthEa6jfdURx6221sVfg",
   authDomain: "cdh1-a7b54.firebaseapp.com",
   databaseURL: "https://cdh1-a7b54.firebaseio.com",

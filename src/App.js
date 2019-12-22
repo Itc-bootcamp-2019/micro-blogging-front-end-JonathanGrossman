@@ -3,8 +3,7 @@
 //// LET USER UPDATE EMAIL (UPDATES COLLECTION OBJECT AND AUTH)
 //// LET USER UPDATE PASSWORD
 
-import React, { useState, useEffect, useContext } from "react";
-import { Redirect } from "react-router";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,14 +18,12 @@ import AppContext from "./context/AppContext";
 import firebase from "./lib/firebase";
 import AuthProvider from "./auth/Auth";
 import PrivateRoute from "./auth/PrivateRoute";
-import { AuthContext } from "./auth/Auth";
 import "./App.css";
 
 function App() {
   const [signedInUser, setSignedInUser] = useState(null);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const savedName = localStorage.getItem("microBlogUserName");
   const [isInputValid, setInputValidity] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -43,12 +40,9 @@ function App() {
   const [profileImage, setProfileImage] = useState("");
   const [urlProfileImage, setUrlProfileImage] = useState("");
   const successMessage = "User Name updated!";
-  const appContext = useContext(AppContext);
-  const currentUser = useContext(AuthContext);
 
   const updateUserName = () => {
-    var user = firebase.auth().currentUser;
-    console.log(user);
+    const user = firebase.auth().currentUser;
     if (userName !== "") {
       setIsUpdatingName(true);
       setTimeout(function() {

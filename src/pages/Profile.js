@@ -1,26 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
 import AppContext from "../context/AppContext";
 import firebase from "../lib/firebase";
-import { AuthContext } from "../auth/Auth";
 import { storage } from "../lib/firebase";
 
 const Profile = () => {
   const appContext = useContext(AppContext);
-  const currentUser = useContext(AuthContext);
-
-  // useEffect(() => {
-  //   const currentPhoto = storage
-  //     .ref("images")
-  //     .child(image.name)
-  //     .getDownloadURL()
-  //     .then(urlForSetting => {
-  //       setUrl(urlForSetting);
-  //     });
-  //   console.log(currentPhoto);
-  // });
 
   const handleChangeImage = e => {
     if (e.target.files[0]) {
@@ -36,10 +23,10 @@ const Profile = () => {
     uploadTask.on(
       "state_changed",
       snapshot => {
-        // placeholder in case want to show message while uploading
+        // placeholder to show message while uploading
       },
       error => {
-        console.log(error);
+        // placeholder for alerting errors
       },
       () => {
         storage
@@ -47,8 +34,18 @@ const Profile = () => {
           .child(appContext.profileImage.name)
           .getDownloadURL()
           .then(urlForSetting => {
-            // THIS IS WHERE TO UPDATE USER'S IMAGE IN USER COLLECTION
             appContext.setUrlProfileImage(urlForSetting);
+            const db = firebase.firestore();
+            db.collection("users")
+              .get()
+              .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                  if (appContext.userEmail === doc.data().email)
+                    db.collection("users")
+                      .doc(doc.data().id)
+                      .update({ image: urlForSetting });
+                });
+              });
           });
       }
     );
