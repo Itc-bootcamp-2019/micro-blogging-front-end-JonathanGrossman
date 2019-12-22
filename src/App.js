@@ -1,6 +1,5 @@
 // TO DO:
-//// ASSIGN UNIQUE ID TO EACH MESSAGE AND EACH USER -- i think i did this for messages but need to test tomorrow when FB daily limits are restored
-//// LET USER UPDATE NAME
+
 //// LET USER UPDATE EMAIL (UPDATES COLLECTION OBJECT AND AUTH)
 //// LET USER UPDATE PASSWORD
 

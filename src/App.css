@@ -213,8 +213,53 @@ body {
   line-height: 21px;
   color: rgba(255, 255, 255, 0.8);
 }
+
+.profile-username-subtitle {
+  position: absolute;
+  height: 21px;
+  left: 28vw;
+  top: 400px;
+  font-size: 18px;
+  line-height: 21px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .profile-input-wrapper {
   position: relative;
+}
+
+.user-photo {
+  color: white;
+  background: #15202b;
+  position: absolute;
+  left: 28vw;
+  top: 170px;
+  border: 2px solid #cccccc;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+}
+
+.photo-button-wrapper {
+  position: absolute;
+  left: 28vw;
+  top: 335px;
+  display: flex;
+  width: 150px;
+}
+
+.user-photo-choose-label {
+  margin: 5px;
+}
+
+.user-photo-choose-button {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+}
+
+.user-photo-save-button {
+  margin: 5px;
 }
 
 .username-input {
@@ -226,7 +271,7 @@ body {
   width: 45vw;
   height: 61px;
   left: 28vw;
-  top: 205px;
+  top: 430px;
   border: 2px solid #cccccc;
   box-sizing: border-box;
   border-radius: 6px;
@@ -236,7 +281,7 @@ body {
 .input-button-profile {
   position: absolute;
   left: 67vw;
-  top: 282px;
+  top: 500px;
 }
 
 .logout-button-profile {
