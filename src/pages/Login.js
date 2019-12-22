@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
 import { Formik } from "formik";
 import firebase from "../lib/firebase";
 import "firebase/auth";
 import { AuthContext } from "../auth/Auth";
 import AppContext from "../context/AppContext";
-import { app } from "firebase";
+import Spinner from "../components/Spinner";
 
 const Login = ({ history }) => {
   const appContext = useContext(AppContext);
   const currentUser = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   if (currentUser) {
     appContext.setSignedInUser(currentUser);
@@ -51,11 +52,12 @@ const Login = ({ history }) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
+          setIsLoading(true);
           setTimeout(() => {
             firebase
               .auth()
               .signInWithEmailAndPassword(values.email, values.password)
-              .then(history.push("/"))
+              .then(setIsLoading(false), history.push("/"))
               .catch(
                 function(error) {
                   // Handle Errors here.
@@ -111,9 +113,20 @@ const Login = ({ history }) => {
                   {errors.password && touched.password && errors.password}
                 </div>
               </div>
-              <button type="submit" disabled={isSubmitting} className="button">
-                Login
-              </button>
+              {isLoading && (
+                <div className="login-spinner">
+                  <Spinner />
+                </div>
+              )}
+              {!isLoading && (
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="button"
+                >
+                  Login
+                </button>
+              )}
             </form>
           </div>
         )}

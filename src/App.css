@@ -135,6 +135,12 @@ body {
   width: 68px;
 }
 
+.login-spinner {
+  position: absolute;
+  height: 34px;
+  width: 40px;
+}
+
 .spinner {
   position: absolute;
   bottom: 0;

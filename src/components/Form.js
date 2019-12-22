@@ -32,7 +32,9 @@ const Form = () => {
         value={appContext.content}
       ></textarea>
       <div className="message-button-home">
-        {appContext.isSpinning && <Spinner />}
+        {appContext.isSpinning && (
+          <Spinner />
+        )}
         {!appContext.isSpinning && <Button type="Tweet" />}
       </div>
     </div>
