@@ -5,9 +5,9 @@ import firebase from "../lib/firebase";
 import "firebase/auth";
 import AppContext from "../context/AppContext";
 
-import uuid from "uuidv4";
-
 const Signup = ({ history }) => {
+  const defaultImage =
+    "https://firebasestorage.googleapis.com/v0/b/cdh1-a7b54.appspot.com/o/images%2Fdefault.jpg?alt=media&token=e56251de-275b-4bd0-88ea-54cea0f71a71";
   const appContext = useContext(AppContext);
   const db = firebase.firestore();
   return (
@@ -59,7 +59,11 @@ const Signup = ({ history }) => {
                   }),
                 db
                   .collection("users")
-                  .add({ name: values.username, email: values.email })
+                  .add({
+                    name: values.username,
+                    email: values.email,
+                    image: defaultImage
+                  })
                   .then(function(docRef) {
                     db.collection("users")
                       .doc(docRef.id)

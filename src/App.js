@@ -40,6 +40,8 @@ function App() {
   const [buttonClass, setButtonClass] = useState(
     "message-button-home submit-button-off"
   );
+  const [profileImage, setProfileImage] = useState("");
+  const [urlProfileImage, setUrlProfileImage] = useState("");
   const successMessage = "User Name updated!";
   const appContext = useContext(AppContext);
   const currentUser = useContext(AuthContext);
@@ -212,7 +214,11 @@ function App() {
                 updateUserName,
                 toggleAlert,
                 applyThisClass,
-                setApplyThisClass
+                setApplyThisClass,
+                profileImage,
+                setProfileImage,
+                urlProfileImage,
+                setUrlProfileImage
               }}
             >
               <PrivateRoute exact path="/profile" component={Profile} />

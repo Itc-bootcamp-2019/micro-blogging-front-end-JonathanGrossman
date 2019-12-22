@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
@@ -10,39 +10,45 @@ import { storage } from "../lib/firebase";
 const Profile = () => {
   const appContext = useContext(AppContext);
   const currentUser = useContext(AuthContext);
-  const [image, setImage] = useState("");
-  const [progress, setProgress] = useState("");
-  const [url, setUrl] = useState("");
+
+  // useEffect(() => {
+  //   const currentPhoto = storage
+  //     .ref("images")
+  //     .child(image.name)
+  //     .getDownloadURL()
+  //     .then(urlForSetting => {
+  //       setUrl(urlForSetting);
+  //     });
+  //   console.log(currentPhoto);
+  // });
 
   const handleChangeImage = e => {
     if (e.target.files[0]) {
       const imageForSetting = e.target.files[0];
-      setImage(imageForSetting);
+      appContext.setProfileImage(imageForSetting);
     }
   };
+
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    const uploadTask = storage
+      .ref(`images/${appContext.profileImage.name}`)
+      .put(appContext.profileImage);
     uploadTask.on(
       "state_changed",
       snapshot => {
-        // progrss function ....
-        const progressSoFar = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progressSoFar);
+        // placeholder in case want to show message while uploading
       },
       error => {
-        // error function ....
         console.log(error);
       },
       () => {
-        // complete function ....
         storage
           .ref("images")
-          .child(image.name)
+          .child(appContext.profileImage.name)
           .getDownloadURL()
           .then(urlForSetting => {
-            setUrl(urlForSetting);
+            // THIS IS WHERE TO UPDATE USER'S IMAGE IN USER COLLECTION
+            appContext.setUrlProfileImage(urlForSetting);
           });
       }
     );
@@ -58,12 +64,15 @@ const Profile = () => {
     <div className="profile">
       <div className="page-title">Profile</div>
       <img
-        src={"http://via.placeholder.com/400x300"}
+        src={appContext.urlProfileImage || "http://via.placeholder.com/400x300"}
         alt="user"
         className="user-photo"
       />
       <div className="photo-button-wrapper">
-        <label for="upload-photo" className="button user-photo-choose-label">
+        <label
+          htmlFor="upload-photo"
+          className="button user-photo-choose-label"
+        >
           Select
         </label>
         <input

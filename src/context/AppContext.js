@@ -29,7 +29,11 @@ const MyAppContext = React.createContext({
   buttonClass: "",
   setButtonClass: "",
   applyThisClass: "",
-  setApplyThisClass: ""
+  setApplyThisClass: "",
+  profileImage: "",
+  setProfileImage: "",
+  urlProfileImage: "",
+  setUrlProfileImage: ""
 });
 
 export default MyAppContext;

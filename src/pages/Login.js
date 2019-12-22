@@ -21,6 +21,7 @@ const Login = ({ history }) => {
           if (currentUser.email === doc.data().email) {
             appContext.setUserName(doc.data().name);
             appContext.setUserEmail(doc.data().email);
+            appContext.setUrlProfileImage(doc.data().image);
           }
         });
       });
