@@ -1,14 +1,17 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { withRouter } from "react-router";
 import { Formik } from "formik";
 import firebase from "../lib/firebase";
 import "firebase/auth";
 import AppContext from "../context/AppContext";
+import Spinner from "../components/Spinner";
 
 const Signup = ({ history }) => {
   const defaultImage =
     "https://firebasestorage.googleapis.com/v0/b/cdh1-a7b54.appspot.com/o/images%2Fdefault.jpg?alt=media&token=e56251de-275b-4bd0-88ea-54cea0f71a71";
   const appContext = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
+
   const db = firebase.firestore();
   return (
     <div>
@@ -48,6 +51,7 @@ const Signup = ({ history }) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
+          setIsLoading(true);
           setTimeout(() => {
             firebase
               .auth()
@@ -70,6 +74,7 @@ const Signup = ({ history }) => {
                       .update({ id: docRef.id });
                     appContext.setUserName(values.setUserName);
                     appContext.setUserEmail(values.setUserEmail);
+                    setIsLoading(false);
                     history.push("/");
                   })
                   .catch(function(error) {
@@ -161,9 +166,20 @@ const Signup = ({ history }) => {
                     errors.confirmpassword}
                 </div>
               </div>
-              <button type="submit" disabled={isSubmitting} className="button">
-                Signup
-              </button>
+              {isLoading && (
+                <div className="login-spinner">
+                  <Spinner />
+                </div>
+              )}
+              {!isLoading && (
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="button"
+                >
+                  Signup
+                </button>
+              )}
             </form>
           </div>
         )}
