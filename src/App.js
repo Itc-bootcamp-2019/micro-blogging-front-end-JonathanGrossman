@@ -1,3 +1,9 @@
+// TO DO:
+//// ASSIGN UNIQUE ID TO EACH MESSAGE AND EACH USER -- i think i did this for messages but need to test tomorrow when FB daily limits are restored
+//// LET USER UPDATE NAME
+//// LET USER UPDATE EMAIL (UPDATES COLLECTION OBJECT AND AUTH)
+//// LET USER UPDATE PASSWORD
+
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router";
 import {
@@ -36,23 +42,35 @@ function App() {
     "message-button-home submit-button-off"
   );
   const successMessage = "User Name updated!";
+  const appContext = useContext(AppContext);
   const currentUser = useContext(AuthContext);
 
-  const updateLocalStorage = () => {
-    // if (userName !== "") {
-    //   setIsUpdatingName(true);
-    //   setTimeout(function() {
-    //     setIsUpdatingName(false);
-    //     setShowAlert(true);
-    //     toggleAlert();
-    //   }, 3000);
-    //   localStorage.setItem("microBlogUserName", userName);
-    // } else if (userName === "") {
-    //   setIsError(true);
-    //   setTimeout(function() {
-    //     setIsError(false);
-    //   }, 3000);
-    // }
+  const updateUserName = () => {
+    var user = firebase.auth().currentUser;
+    if (userName !== "") {
+      setIsUpdatingName(true);
+      setTimeout(function() {
+        setIsUpdatingName(false);
+        setShowAlert(true);
+        toggleAlert();
+      }, 3000);
+      user
+        .updateProfile({ displayName: userName })
+        .then(setUserName(userName))
+        .catch();
+
+      const db = firebase.firestore();
+      db.collection("users")
+        .doc()
+        .update({ name: userName });
+
+      // UPDATE USER COLLECTION INFO HERE (SAME AS FOR MESSAGES, ASSUMING MESSAGES APPROACH WORKED)
+    } else if (userName === "") {
+      setIsError(true);
+      setTimeout(function() {
+        setIsError(false);
+      }, 3000);
+    }
   };
 
   const toggleAlert = () => {
@@ -65,12 +83,13 @@ function App() {
     setInputValidity(false);
     setIsSpinning(true);
     const db = firebase.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
     db.collection("messages")
       .add(value)
       .then(function(docRef) {
+        db.ref()
+          .child("messages")
+          .doc(docRef.id)
+          .update({ id: docRef.id });
         setInputValidity(true);
         setIsSpinning(false);
         setMessagesArray([...messagesArray], value);
@@ -183,7 +202,7 @@ function App() {
                 setShowAlert,
                 buttonClass,
                 setButtonClass,
-                updateLocalStorage,
+                updateUserName,
                 toggleAlert,
                 applyThisClass,
                 setApplyThisClass

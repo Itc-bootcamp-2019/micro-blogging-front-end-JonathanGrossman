@@ -35,7 +35,7 @@ const Button = props => {
       {type === "Save" && (
         <button
           className={"button " + appContext.buttonClass}
-          onClick={appContext.updateLocalStorage}
+          onClick={appContext.updateUserName}
         >
           {type}
         </button>

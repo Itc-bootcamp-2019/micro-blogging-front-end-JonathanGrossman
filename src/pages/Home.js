@@ -8,7 +8,6 @@ const Home = () => {
   const appContext = useContext(AppContext);
 
   const loadMessages = useCallback(() => {
-    setTimeout(function() {
       const db = firebase.firestore();
       db.collection("messages")
         .get()
@@ -24,7 +23,23 @@ const Home = () => {
           });
           appContext.setMessagesArray(array);
         });
-    }, 2000);
+    // setTimeout(function() {
+    //   const db = firebase.firestore();
+    //   db.collection("messages")
+    //     .get()
+    //     .then(function(querySnapshot) {
+    //       const array = [];
+    //       querySnapshot.forEach(function(doc) {
+    //         const messageObject = {
+    //           userName: doc.data().userName,
+    //           date: doc.data().date,
+    //           content: doc.data().content
+    //         };
+    //         array.push(messageObject);
+    //       });
+    //       appContext.setMessagesArray(array);
+    //     });
+    // }, 20000);
   });
 
   useEffect(() => {
