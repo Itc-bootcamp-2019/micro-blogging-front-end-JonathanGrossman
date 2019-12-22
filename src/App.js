@@ -47,6 +47,7 @@ function App() {
 
   const updateUserName = () => {
     var user = firebase.auth().currentUser;
+    console.log(user);
     if (userName !== "") {
       setIsUpdatingName(true);
       setTimeout(function() {
@@ -54,17 +55,25 @@ function App() {
         setShowAlert(true);
         toggleAlert();
       }, 3000);
+
+      //UPDATES USER IN FIREBASE AUTHENTICATION
       user
         .updateProfile({ displayName: userName })
         .then(setUserName(userName))
         .catch();
 
+      // UPDATES USER COLLECTION INFO
       const db = firebase.firestore();
       db.collection("users")
-        .doc()
-        .update({ name: userName });
-
-      // UPDATE USER COLLECTION INFO HERE (SAME AS FOR MESSAGES, ASSUMING MESSAGES APPROACH WORKED)
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            if (user.email === doc.data().email)
+              db.collection("users")
+                .doc(doc.data().id)
+                .update({ name: userName });
+          });
+        });
     } else if (userName === "") {
       setIsError(true);
       setTimeout(function() {
