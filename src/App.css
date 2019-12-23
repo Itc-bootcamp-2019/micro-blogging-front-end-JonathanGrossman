@@ -114,8 +114,14 @@ body {
   width: 100%;
   background: #343a40;
   border-radius: 6px;
-  padding: 20px;
+  padding: 15px;
   overflow-wrap: normal;
+}
+
+.message-photo {
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
 }
 
 .message-credentials {

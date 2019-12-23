@@ -17,29 +17,13 @@ const Home = () => {
           const messageObject = {
             userName: doc.data().userName,
             date: doc.data().date,
-            content: doc.data().content
+            content: doc.data().content,
+            urlProfileImage: doc.data().urlProfileImage
           };
           array.push(messageObject);
         });
         appContext.setMessagesArray(array);
       });
-    // setTimeout(function() {
-    //   const db = firebase.firestore();
-    //   db.collection("messages")
-    //     .get()
-    //     .then(function(querySnapshot) {
-    //       const array = [];
-    //       querySnapshot.forEach(function(doc) {
-    //         const messageObject = {
-    //           userName: doc.data().userName,
-    //           date: doc.data().date,
-    //           content: doc.data().content
-    //         };
-    //         array.push(messageObject);
-    //       });
-    //       appContext.setMessagesArray(array);
-    //     });
-    // }, 20000);
   });
 
   useEffect(() => {

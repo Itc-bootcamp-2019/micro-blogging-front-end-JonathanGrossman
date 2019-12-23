@@ -1,12 +1,12 @@
 // TO DO:
 
 //// DONT ALLOW SUBMISSION OF NO PHOTO
-//// FIX PHOTO SIZING / ASPECT RATIO
 //// LET USER UPDATE EMAIL (UPDATES COLLECTION OBJECT AND AUTH)
 //// LET USER UPDATE PASSWORD
 //// CHANGE READ / WRITE PERMISSIONS FOR STORAGE
 //// CHANGE READ / WRITE PERMISSIONS FOR AUTH
 //// CHANGE READ / WRITE PERMISSIONS FOR DATABASE
+//// REAL-TIME UPDATES ON MESSAGE FEED
 
 import React, { useState } from "react";
 import {
@@ -116,7 +116,7 @@ function App() {
 
   const submitMessage = () => {
     if (isInputValid) {
-      addMessageToArray({ date, userName, content });
+      addMessageToArray({ date, userName, content, urlProfileImage });
       setContent("");
     }
   };
