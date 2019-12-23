@@ -44,37 +44,53 @@ function App() {
   );
   const [profileImage, setProfileImage] = useState("");
   const [urlProfileImage, setUrlProfileImage] = useState("");
+  const [reauthRequired, setReauthRequired] = useState(false);
+  const [verifyOldEmail, setVerifyOldEmail] = useState(false);
   const successMessage = "User Name updated!";
 
   const updateUserName = () => {
     const user = firebase.auth().currentUser;
-    if (userName !== "") {
-      setIsUpdatingName(true);
-      setTimeout(function() {
-        setIsUpdatingName(false);
-        setShowAlert(true);
-        toggleAlert();
-      }, 3000);
+    if (!reauthRequired) {
+      if (userName !== "") {
+        setIsUpdatingName(true);
+        setTimeout(function() {
+          setIsUpdatingName(false);
+          setShowAlert(true);
+          toggleAlert();
+        }, 3000);
 
-      //UPDATES USER IN FIREBASE AUTHENTICATION
-      user
-        .updateProfile({ displayName: userName })
-        .then(setUserName(userName))
-        .catch();
+        //UPDATES USER IN FIREBASE AUTHENTICATION
+        user
+          .updateProfile({ displayName: userName })
+          .then(setUserName(userName))
+          .catch();
 
-      // UPDATES USER COLLECTION INFO
-      const db = firebase.firestore();
-      db.collection("users")
-        .get()
-        .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            if (user.email === doc.data().email)
-              db.collection("users")
-                .doc(doc.data().id)
-                .update({ name: userName });
+        user
+          .updateEmail(userEmail)
+          .then(function() {
+            setUserEmail(userEmail);
+          })
+          .catch(function(error) {
+            console.log(error);
+            if (error.code === "auth/requires-recent-login") {
+              setReauthRequired(true);
+            }
+            // An error happened.
           });
-        });
-    } else if (userName === "") {
+        // UPDATES USER COLLECTION INFO
+        const db = firebase.firestore();
+        db.collection("users")
+          .get()
+          .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              if (user.email === doc.data().email)
+                db.collection("users")
+                  .doc(doc.data().id)
+                  .update({ name: userName, email: userEmail });
+            });
+          });
+      }
+    } else if (userName === "" || userEmail === "") {
       setIsError(true);
       setTimeout(function() {
         setIsError(false);
@@ -217,7 +233,11 @@ function App() {
                 profileImage,
                 setProfileImage,
                 urlProfileImage,
-                setUrlProfileImage
+                setUrlProfileImage,
+                reauthRequired,
+                setReauthRequired,
+                verifyOldEmail,
+                setVerifyOldEmail
               }}
             >
               <PrivateRoute exact path="/profile" component={Profile} />

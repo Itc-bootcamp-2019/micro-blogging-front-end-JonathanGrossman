@@ -11,15 +11,11 @@ const Profile = () => {
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isPhotoSelected, setIsPhotoSelected] = useState(false);
-
-  // useEffect(() => {
-  //   appContext.setProfileImage("");
-  // }, [appContext]);
+  const [password, setPassword] = useState(false);
 
   const handleChangeImage = e => {
     if (e.target.files[0]) {
       setFile(URL.createObjectURL(e.target.files[0]));
-
       const imageForSetting = e.target.files[0];
       appContext.setProfileImage(imageForSetting);
       setIsPhotoSelected(true);
@@ -68,6 +64,53 @@ const Profile = () => {
   const handleChange = e => {
     appContext.setUserName(e.target.value);
   };
+  const handleChangeEmail = e => {
+    appContext.setUserEmail(e.target.value);
+  };
+  const handleVerifyEmail = e => {
+    appContext.setVerifyOldEmail(e.target.value);
+  };
+  const handleChangePassword = e => {
+    setPassword(e.target.value);
+  };
+  const handleReauth = history => {
+    const user = firebase.auth().currentUser;
+    const credential = firebase.auth.EmailAuthProvider.credential(
+      appContext.verifyOldEmail,
+      password
+    );
+    user
+      .reauthenticateWithCredential(credential)
+      .then(function() {
+        // UPDATE USER AUTH
+        user
+          .updateEmail(appContext.userEmail)
+          .then(function() {
+            appContext.setUserEmail(appContext.userEmail);
+            appContext.setReauthRequired(false);
+          })
+          .catch(function(error) {
+            console.log(error);
+            // An error happened.
+          });
+        // UPDATE USER COLLECTION
+        const db = firebase.firestore();
+        db.collection("users")
+          .get()
+          .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              if (user.email === doc.data().email)
+                db.collection("users")
+                  .doc(doc.data().id)
+                  .update({ email: appContext.userEmail });
+            });
+          });
+        history.push("/profile");
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+  };
   const logout = () => {
     appContext.setSignedInUser(null);
     firebase.auth().signOut();
@@ -115,7 +158,7 @@ const Profile = () => {
         </button>
       </div>
       <div className="profile-username-subtitle">User Name</div>
-      {appContext.showAlert && (
+      {!appContext.reauthRequired && appContext.showAlert && (
         <div className="alert-profile-updated">
           <Alert type="Success" />
         </div>
@@ -125,29 +168,53 @@ const Profile = () => {
           <Alert type="Profile Error" />
         </div>
       )}
-      <div className="profile-input-wrapper">
-        <input
-          type="text"
-          value={appContext.userName}
-          onChange={e => handleChange(e)}
-          className="username-input"
-        />
-        <input
-          type="text"
-          value={appContext.userEmail}
-          onChange={e => handleChange(e)}
-          className="useremail-input"
-        />
-        {appContext.isUpdatingName && (
-          <div className="profile-spinner">
-            <Spinner />
-          </div>
-        )}
-        {!appContext.isUpdatingName && <Button type="Save" />}
-      </div>
+      {!appContext.reauthRequired && (
+        <div className="profile-input-wrapper">
+          <input
+            type="text"
+            value={appContext.userName}
+            onChange={e => handleChange(e)}
+            className="username-input"
+          />
+          <input
+            type="text"
+            value={appContext.userEmail}
+            onChange={e => handleChangeEmail(e)}
+            className="useremail-input"
+          />
+          {appContext.isUpdatingName && (
+            <div className="profile-spinner">
+              <Spinner />
+            </div>
+          )}
+          {!appContext.isUpdatingName && <Button type="Save" />}
+        </div>
+      )}
       <button className="button logout-button-profile" onClick={logout}>
         Logout
       </button>
+      {appContext.reauthRequired && <div className="reauth-required"></div>}
+      {appContext.reauthRequired && (
+        <input
+          type="text"
+          onChange={e => handleVerifyEmail(e)}
+          className="username-input"
+          placeholder="Confirm old email"
+        />
+      )}
+      {appContext.reauthRequired && (
+        <input
+          type="password"
+          onChange={e => handleChangePassword(e)}
+          className="useremail-input"
+          placeholder="Confirm password"
+        />
+      )}
+      {appContext.reauthRequired && (
+        <button className="button input-button-profile" onClick={handleReauth}>
+          Verify
+        </button>
+      )}
     </div>
   );
 };

@@ -33,7 +33,11 @@ const MyAppContext = React.createContext({
   profileImage: "",
   setProfileImage: "",
   urlProfileImage: "",
-  setUrlProfileImage: ""
+  setUrlProfileImage: "",
+  reauthRequired: "",
+  setReauthRequired: "",
+  verifyOldEmail: "",
+  setVerifyOldEmail: ""
 });
 
 export default MyAppContext;
