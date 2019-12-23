@@ -15,7 +15,7 @@ const Profile = () => {
   useEffect(() => {
     appContext.setProfileImage("");
   }, [appContext]);
-  
+
   const handleChangeImage = e => {
     if (e.target.files[0]) {
       setFile(URL.createObjectURL(e.target.files[0]));
