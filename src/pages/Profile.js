@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
@@ -8,11 +8,18 @@ import { storage } from "../lib/firebase";
 
 const Profile = () => {
   const appContext = useContext(AppContext);
+  const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isPhotoSelected, setIsPhotoSelected] = useState(false);
 
+  useEffect(() => {
+    appContext.setProfileImage("");
+  }, [appContext]);
+  
   const handleChangeImage = e => {
     if (e.target.files[0]) {
+      setFile(URL.createObjectURL(e.target.files[0]));
+
       const imageForSetting = e.target.files[0];
       appContext.setProfileImage(imageForSetting);
       setIsPhotoSelected(true);
@@ -70,9 +77,7 @@ const Profile = () => {
       <div className="page-title">Profile</div>
       {!isLoading && (
         <img
-          src={
-            appContext.urlProfileImage || "http://via.placeholder.com/400x300"
-          }
+          src={file || appContext.urlProfileImage}
           alt="user"
           className="user-photo"
         />
