@@ -12,9 +12,9 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isPhotoSelected, setIsPhotoSelected] = useState(false);
 
-  useEffect(() => {
-    appContext.setProfileImage("");
-  }, [appContext]);
+  // useEffect(() => {
+  //   appContext.setProfileImage("");
+  // }, [appContext]);
 
   const handleChangeImage = e => {
     if (e.target.files[0]) {
