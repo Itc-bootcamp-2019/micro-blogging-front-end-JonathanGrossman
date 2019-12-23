@@ -8,21 +8,21 @@ const Home = () => {
   const appContext = useContext(AppContext);
 
   const loadMessages = useCallback(() => {
-      const db = firebase.firestore();
-      db.collection("messages")
-        .get()
-        .then(function(querySnapshot) {
-          const array = [];
-          querySnapshot.forEach(function(doc) {
-            const messageObject = {
-              userName: doc.data().userName,
-              date: doc.data().date,
-              content: doc.data().content
-            };
-            array.push(messageObject);
-          });
-          appContext.setMessagesArray(array);
+    const db = firebase.firestore();
+    db.collection("messages")
+      .get()
+      .then(function(querySnapshot) {
+        const array = [];
+        querySnapshot.forEach(function(doc) {
+          const messageObject = {
+            userName: doc.data().userName,
+            date: doc.data().date,
+            content: doc.data().content
+          };
+          array.push(messageObject);
         });
+        appContext.setMessagesArray(array);
+      });
     // setTimeout(function() {
     //   const db = firebase.firestore();
     //   db.collection("messages")

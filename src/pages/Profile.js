@@ -9,11 +9,13 @@ import { storage } from "../lib/firebase";
 const Profile = () => {
   const appContext = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPhotoSelected, setIsPhotoSelected] = useState(false);
 
   const handleChangeImage = e => {
     if (e.target.files[0]) {
       const imageForSetting = e.target.files[0];
       appContext.setProfileImage(imageForSetting);
+      setIsPhotoSelected(true);
     }
   };
 
@@ -47,6 +49,7 @@ const Profile = () => {
                       .doc(doc.data().id)
                       .update({ image: urlForSetting });
                     setIsLoading(false);
+                    setIsPhotoSelected(false);
                   }
                 });
               });
@@ -93,12 +96,14 @@ const Profile = () => {
           onChange={handleChangeImage}
           className="user-photo-choose-button"
         />
-        <button
-          onClick={handleUpload}
-          className="button user-photo-save-button"
-        >
-          Save
-        </button>
+        
+          <button
+            onClick={handleUpload}
+            className={isPhotoSelected ? "button user-photo-save-button" : "button user-photo-save-button-inactive" }
+          >
+            Save
+          </button>
+        
       </div>
       <div className="profile-username-subtitle">User Name</div>
 

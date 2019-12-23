@@ -275,6 +275,13 @@ body {
   margin: 5px;
 }
 
+.user-photo-save-button-inactive {
+  pointer-events: none;
+  opacity: 0.5;
+  background: #343a40;
+  margin: 5px;
+}
+
 .username-input {
   color: white;
   font-size: 16px;
