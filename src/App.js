@@ -48,7 +48,7 @@ function App() {
   const [verifyOldEmail, setVerifyOldEmail] = useState(false);
   const successMessage = "User Name updated!";
 
-  const updateUserName = () => {
+  const updateUserName = history => {
     const user = firebase.auth().currentUser;
     if (!reauthRequired) {
       if (userName !== "") {
@@ -58,7 +58,18 @@ function App() {
           setShowAlert(true);
           toggleAlert();
         }, 3000);
-
+        // UPDATES USER COLLECTION INFO
+        const db = firebase.firestore();
+        db.collection("users")
+          .get()
+          .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              if (user.email === doc.data().email)
+                db.collection("users")
+                  .doc(doc.data().id)
+                  .update({ name: userName, email: userEmail });
+            });
+          });
         //UPDATES USER IN FIREBASE AUTHENTICATION
         user
           .updateProfile({ displayName: userName })
@@ -71,23 +82,10 @@ function App() {
             setUserEmail(userEmail);
           })
           .catch(function(error) {
-            console.log(error);
             if (error.code === "auth/requires-recent-login") {
               setReauthRequired(true);
             }
             // An error happened.
-          });
-        // UPDATES USER COLLECTION INFO
-        const db = firebase.firestore();
-        db.collection("users")
-          .get()
-          .then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-              if (user.email === doc.data().email)
-                db.collection("users")
-                  .doc(doc.data().id)
-                  .update({ name: userName, email: userEmail });
-            });
           });
       }
     } else if (userName === "" || userEmail === "") {

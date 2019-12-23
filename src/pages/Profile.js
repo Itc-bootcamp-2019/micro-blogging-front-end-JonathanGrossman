@@ -90,7 +90,6 @@ const Profile = () => {
             appContext.setReauthRequired(false);
           })
           .catch(function(error) {
-            console.log(error);
             // An error happened.
           });
         // UPDATE USER COLLECTION
@@ -157,7 +156,9 @@ const Profile = () => {
           Save
         </button>
       </div>
-      <div className="profile-username-subtitle">User Name</div>
+      {!appContext.reauthRequired && (
+        <div className="profile-username-subtitle">User Name</div>
+      )}
       {!appContext.reauthRequired && appContext.showAlert && (
         <div className="alert-profile-updated">
           <Alert type="Success" />
@@ -190,9 +191,9 @@ const Profile = () => {
           {!appContext.isUpdatingName && <Button type="Save" />}
         </div>
       )}
-      <button className="button logout-button-profile" onClick={logout}>
+     {!appContext.reauthRequired && <button className="button logout-button-profile" onClick={logout}>
         Logout
-      </button>
+      </button>}
       {appContext.reauthRequired && <div className="reauth-required"></div>}
       {appContext.reauthRequired && (
         <input
