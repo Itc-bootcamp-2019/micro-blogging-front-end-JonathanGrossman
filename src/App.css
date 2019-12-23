@@ -312,10 +312,26 @@ body {
   padding: 20px 15px;
 }
 
+.useremail-input {
+  color: white;
+  font-size: 16px;
+  line-height: 19px;
+  background: #15202b;
+  position: absolute;
+  width: 45vw;
+  height: 61px;
+  left: 28vw;
+  top: 505px;
+  border: 2px solid #cccccc;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 20px 15px;
+}
+
 .input-button-profile {
   position: absolute;
   left: 67vw;
-  top: 500px;
+  top: 580px;
 }
 
 .logout-button-profile {

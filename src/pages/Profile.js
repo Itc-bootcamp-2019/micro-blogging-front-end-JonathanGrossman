@@ -132,6 +132,12 @@ const Profile = () => {
           onChange={e => handleChange(e)}
           className="username-input"
         />
+        <input
+          type="text"
+          value={appContext.userEmail}
+          onChange={e => handleChange(e)}
+          className="useremail-input"
+        />
         {appContext.isUpdatingName && (
           <div className="profile-spinner">
             <Spinner />
