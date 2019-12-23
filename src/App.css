@@ -253,10 +253,17 @@ body {
   width: 150px;
 }
 
+.user-photo-name {
+  color: white;
+  position: absolute;
+  left: 32vw;
+  top: 325px;
+}
+
 .photo-button-wrapper {
   position: absolute;
   left: 28vw;
-  top: 335px;
+  top: 345px;
   display: flex;
   width: 150px;
 }

@@ -50,6 +50,7 @@ const Profile = () => {
                       .update({ image: urlForSetting });
                     setIsLoading(false);
                     setIsPhotoSelected(false);
+                    appContext.setProfileImage("");
                   }
                 });
               });
@@ -83,6 +84,7 @@ const Profile = () => {
           </div>
         </div>
       )}
+      <div className="user-photo-name">{appContext.profileImage.name}</div>
       <div className="photo-button-wrapper">
         <label
           htmlFor="upload-photo"
@@ -96,17 +98,18 @@ const Profile = () => {
           onChange={handleChangeImage}
           className="user-photo-choose-button"
         />
-        
-          <button
-            onClick={handleUpload}
-            className={isPhotoSelected ? "button user-photo-save-button" : "button user-photo-save-button-inactive" }
-          >
-            Save
-          </button>
-        
+        <button
+          onClick={handleUpload}
+          className={
+            isPhotoSelected
+              ? "button user-photo-save-button"
+              : "button user-photo-save-button-inactive"
+          }
+        >
+          Save
+        </button>
       </div>
       <div className="profile-username-subtitle">User Name</div>
-
       {appContext.showAlert && (
         <div className="alert-profile-updated">
           <Alert type="Success" />
