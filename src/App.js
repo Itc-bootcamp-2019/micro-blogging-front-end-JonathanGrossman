@@ -137,19 +137,6 @@ function App() {
     }
   };
 
-  const resetPassword = email => {
-    firebase
-      .auth()
-      .sendPasswordResetEmail(email)
-      .then(function() {
-        // Password reset email sent.
-        console.log("Please check your email for instructions.");
-      })
-      .catch(function(error) {
-        // Error occurred. Inspect error.code.
-      });
-  };
-
   return (
     <AuthProvider>
       <Router>
@@ -245,7 +232,6 @@ function App() {
                 setReauthRequired,
                 verifyOldEmail,
                 setVerifyOldEmail,
-                resetPassword
               }}
             >
               <PrivateRoute exact path="/profile" component={Profile} />

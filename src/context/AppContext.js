@@ -39,8 +39,7 @@ const MyAppContext = React.createContext({
   reauthRequired: "",
   setReauthRequired: "",
   verifyOldEmail: "",
-  setVerifyOldEmail: "",
-  resetPassword: ""
+  setVerifyOldEmail: ""
 });
 
 export default MyAppContext;

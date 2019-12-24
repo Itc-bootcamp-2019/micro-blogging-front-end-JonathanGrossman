@@ -2,10 +2,26 @@ import React, { useState, useContext } from "react";
 import { Formik } from "formik";
 import Spinner from "../components/Spinner";
 import AppContext from "../context/AppContext";
+import firebase from "../lib/firebase";
 
 const ForgotPassword = () => {
-  const appContext = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordResetSuccess, setPasswordResetSuccess] = useState(false);
+
+  const resetPassword = email => {
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(function() {
+        setPasswordResetSuccess(true);
+        setTimeout(function() {
+          setPasswordResetSuccess(false);
+        }, 3000);
+      })
+      .catch(function(error) {
+        // Error occurred. Inspect error.code.
+      });
+  };
   return (
     <div>
       <Formik
@@ -23,7 +39,7 @@ const ForgotPassword = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setIsLoading(true);
-          appContext.resetPassword(values.email);
+          resetPassword(values.email);
           setTimeout(() => {
             setIsLoading(false);
             setSubmitting(false);
@@ -61,6 +77,11 @@ const ForgotPassword = () => {
               {isLoading && (
                 <div className="login-spinner">
                   <Spinner />
+                </div>
+              )}
+              {passwordResetSuccess && (
+                <div className="alert alert-success">
+                  Success! Please check your email for instructions
                 </div>
               )}
               {!isLoading && (
