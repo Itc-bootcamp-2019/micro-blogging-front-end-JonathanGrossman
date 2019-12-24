@@ -20,6 +20,7 @@ const Login = ({ history }) => {
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
           if (currentUser.email === doc.data().email) {
+            appContext.setUserId(doc.data().id);
             appContext.setUserName(doc.data().name);
             appContext.setUserEmail(doc.data().email);
             appContext.setUrlProfileImage(doc.data().image);

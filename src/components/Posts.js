@@ -16,12 +16,8 @@ const Posts = () => {
           return (
             <div key={message.date} className="posted-message">
               <div className="message-credentials">
-                <img
-                  src={message.urlProfileImage}
-                  alt="user"
-                  className="message-photo"
-                />
-                <div>{message.userName}</div>
+                <img src={message.image} alt="user" className="message-photo" />
+                <div>{message.name}</div>
                 <div>{displayDate}</div>
               </div>
               {message.content}

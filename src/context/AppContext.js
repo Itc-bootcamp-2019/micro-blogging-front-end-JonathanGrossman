@@ -2,6 +2,8 @@ import React from "react";
 
 const MyAppContext = React.createContext({
   signedInUser: "",
+  userId: "",
+  setUserId: "",
   userName: "",
   setUserName: "",
   userEmail: "",

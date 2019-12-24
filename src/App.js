@@ -27,6 +27,7 @@ import "./App.css";
 
 function App() {
   const [signedInUser, setSignedInUser] = useState(null);
+  const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [isInputValid, setInputValidity] = useState(false);
@@ -130,7 +131,7 @@ function App() {
 
   const submitMessage = () => {
     if (isInputValid) {
-      addMessageToArray({ date, userName, content, urlProfileImage });
+      addMessageToArray({ date, userId, content });
       setContent("");
     }
   };
@@ -197,6 +198,8 @@ function App() {
               value={{
                 signedInUser,
                 setSignedInUser,
+                userId,
+                setUserId,
                 userName,
                 setUserName,
                 userEmail,

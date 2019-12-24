@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import Form from "../components/Form";
 import Posts from "../components/Posts";
 import AppContext from "../context/AppContext";
@@ -6,29 +6,36 @@ import firebase from "../lib/firebase";
 
 const Home = () => {
   const appContext = useContext(AppContext);
+  const db = firebase.firestore();
 
   const loadMessages = useCallback(() => {
-    const db = firebase.firestore();
     db.collection("messages")
       .get()
       .then(function(querySnapshot) {
-        const array = [];
+        // const array = [];
         querySnapshot.forEach(function(doc) {
-          const messageObject = {
-            userName: doc.data().userName,
-            date: doc.data().date,
-            content: doc.data().content,
-            urlProfileImage: doc.data().urlProfileImage
-          };
-          array.push(messageObject);
+          var docRef = db.collection("users").doc(doc.data().userId);
+          docRef.get().then(function(document) {
+            const messageObject = {
+              name: document.data().name,
+              image: document.data().image,
+              date: doc.data().date,
+              content: doc.data().content
+            };
+            if(!appContext.messagesArray.includes(messageObject)) {
+              appContext.setMessagesArray(prevArray => {
+                return [...prevArray, messageObject];
+              });
+            }
+          });
         });
-        appContext.setMessagesArray(array);
       });
+      return
   });
 
   useEffect(() => {
     loadMessages();
-  }, [loadMessages]);
+  });
 
   return (
     <div className="home">

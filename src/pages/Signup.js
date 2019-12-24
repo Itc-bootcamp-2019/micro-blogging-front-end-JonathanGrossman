@@ -72,6 +72,7 @@ const Signup = ({ history }) => {
                     db.collection("users")
                       .doc(docRef.id)
                       .update({ id: docRef.id });
+                    appContext.setUserId(docRef.id);
                     appContext.setUserName(values.setUserName);
                     appContext.setUserEmail(values.setUserEmail);
                     setIsLoading(false);
