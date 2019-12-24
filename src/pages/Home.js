@@ -6,13 +6,14 @@ import firebase from "../lib/firebase";
 
 const Home = () => {
   const appContext = useContext(AppContext);
+  const [tempArray, setArray] = useState();
   const db = firebase.firestore();
 
   const loadMessages = useCallback(() => {
     db.collection("messages")
       .get()
       .then(function(querySnapshot) {
-        // const array = [];
+        const array = [];
         querySnapshot.forEach(function(doc) {
           var docRef = db.collection("users").doc(doc.data().userId);
           docRef.get().then(function(document) {
@@ -22,15 +23,12 @@ const Home = () => {
               date: doc.data().date,
               content: doc.data().content
             };
-            if(!appContext.messagesArray.includes(messageObject)) {
-              appContext.setMessagesArray(prevArray => {
-                return [...prevArray, messageObject];
-              });
-            }
+            array.push(messageObject);
+            setArray(array);
           });
         });
       });
-      return
+    appContext.setMessagesArray(tempArray);
   });
 
   useEffect(() => {
