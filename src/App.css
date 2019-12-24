@@ -393,5 +393,15 @@ body {
 
 .reset-password {
   text-decoration: none;
-  color: white;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.reset-password-profile {
+  position: absolute;
+  height: 21px;
+  width: 300px;
+  left: 28vw;
+  top: 620px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
 }

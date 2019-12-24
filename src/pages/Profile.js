@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
@@ -189,11 +190,17 @@ const Profile = () => {
             </div>
           )}
           {!appContext.isUpdatingName && <Button type="Save" />}
+          <Link to="/reset-password" className="reset-password-profile">
+            Reset password
+          </Link>
         </div>
       )}
-     {!appContext.reauthRequired && <button className="button logout-button-profile" onClick={logout}>
-        Logout
-      </button>}
+
+      {!appContext.reauthRequired && (
+        <button className="button logout-button-profile" onClick={logout}>
+          Logout
+        </button>
+      )}
       {appContext.reauthRequired && <div className="reauth-required"></div>}
       {appContext.reauthRequired && (
         <input

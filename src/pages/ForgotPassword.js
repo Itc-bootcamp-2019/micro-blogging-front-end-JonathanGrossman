@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import Spinner from "../components/Spinner";
-import AppContext from "../context/AppContext";
 import firebase from "../lib/firebase";
 
 const ForgotPassword = () => {
@@ -57,7 +56,7 @@ const ForgotPassword = () => {
           /* and other goodies */
         }) => (
           <div className="auth-page">
-            <div className="page-title">Forgot Password</div>
+            <div className="page-title">Reset Password</div>
             <div className="page-subtitle">We got you covered.</div>
             <form onSubmit={handleSubmit} className="form-input-wrapper">
               <div className="input-and-error-wrapper">
