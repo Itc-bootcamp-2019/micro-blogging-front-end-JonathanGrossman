@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
+import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import firebase from "../lib/firebase";
 import "firebase/auth";
@@ -11,7 +12,6 @@ const Login = ({ history }) => {
   const appContext = useContext(AppContext);
   const currentUser = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
-
   if (currentUser) {
     appContext.setSignedInUser(currentUser);
     const db = firebase.firestore();
@@ -27,12 +27,10 @@ const Login = ({ history }) => {
           }
         });
       });
-
     return <Redirect to="/" />;
   }
   return (
     <div>
-      (
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={values => {
@@ -113,6 +111,9 @@ const Login = ({ history }) => {
                 <div className="input-error-alert">
                   {errors.password && touched.password && errors.password}
                 </div>
+                <Link to="/reset-password" className="reset-password">
+                  Forgot password?
+                </Link>
               </div>
               {isLoading && (
                 <div className="login-spinner">
@@ -132,7 +133,6 @@ const Login = ({ history }) => {
           </div>
         )}
       </Formik>
-      )
     </div>
   );
 };

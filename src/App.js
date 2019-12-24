@@ -24,6 +24,7 @@ import firebase from "./lib/firebase";
 import AuthProvider from "./auth/Auth";
 import PrivateRoute from "./auth/PrivateRoute";
 import "./App.css";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   const [signedInUser, setSignedInUser] = useState(null);
@@ -136,13 +137,18 @@ function App() {
     }
   };
 
-  // useEffect(() => {
-  //   if (savedName === "undefined" || savedName === null) {
-  //     setUserName("User Name");
-  //   } else {
-  //     setUserName(savedName);
-  //   }
-  // }, [currentUser, savedName]);
+  const resetPassword = email => {
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(function() {
+        // Password reset email sent.
+        console.log("Please check your email for instructions.");
+      })
+      .catch(function(error) {
+        // Error occurred. Inspect error.code.
+      });
+  };
 
   return (
     <AuthProvider>
@@ -238,12 +244,14 @@ function App() {
                 reauthRequired,
                 setReauthRequired,
                 verifyOldEmail,
-                setVerifyOldEmail
+                setVerifyOldEmail,
+                resetPassword
               }}
             >
               <PrivateRoute exact path="/profile" component={Profile} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
+              <Route exact path="/reset-password" component={ForgotPassword} />
               <PrivateRoute exact path="/" component={Home} />
             </AppContext.Provider>
           </Switch>
