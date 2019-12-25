@@ -56,11 +56,7 @@ const Signup = ({ history }) => {
             firebase
               .auth()
               .createUserWithEmailAndPassword(values.email, values.password)
-              .then(
-                response =>
-                  db.settings({
-                    timestampsInSnapshots: true
-                  }),
+              .then(response =>
                 db
                   .collection("users")
                   .add({

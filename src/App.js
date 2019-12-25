@@ -228,7 +228,7 @@ function App() {
                 reauthRequired,
                 setReauthRequired,
                 verifyOldEmail,
-                setVerifyOldEmail,
+                setVerifyOldEmail
               }}
             >
               <PrivateRoute exact path="/profile" component={Profile} />
