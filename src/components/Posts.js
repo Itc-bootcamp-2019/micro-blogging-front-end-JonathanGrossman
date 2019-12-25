@@ -14,32 +14,33 @@ const Posts = props => {
     return array.sort((a, b) => b.date - a.date);
   };
 
+  const mapMessagesToAuthors = (doc, snapshot) => {
+    var docRef = db.collection("users").doc(doc.data().userId);
+    docRef.get().then(function(document) {
+      const messageObject = {
+        name: document.data().name,
+        image: document.data().image,
+        date: doc.data().date,
+        content: doc.data().content
+      };
+      appContext.setMessagesArray(prevArray => [...prevArray, messageObject]);
+      var lastVisible = snapshot.docs[snapshot.docs.length - 1];
+      setLastDocument(lastVisible);
+      setHasMoreMessages(true);
+    });
+  };
+
   const loadMoreMessages = useCallback(() => {
-    if (lastDocument !== undefined) {
+    if (lastDocument !== undefined && hasMoreMessages) {
       setHasMoreMessages(false);
       db.collection("messages")
         .orderBy("date", "desc")
         .startAfter(lastDocument)
-        .limit(10)
+        .limit(5)
         .get()
         .then(function(snapshot) {
           snapshot.docs.map(doc => {
-            var docRef = db.collection("users").doc(doc.data().userId);
-            docRef.get().then(function(document) {
-              const messageObject = {
-                name: document.data().name,
-                image: document.data().image,
-                date: doc.data().date,
-                content: doc.data().content
-              };
-              appContext.setMessagesArray(prevArray => [
-                ...prevArray,
-                messageObject
-              ]);
-              var lastVisible = snapshot.docs[snapshot.docs.length - 1];
-              setLastDocument(lastVisible);
-              setHasMoreMessages(true);
-            });
+            mapMessagesToAuthors(doc, snapshot);
           });
         });
     }
@@ -62,7 +63,6 @@ const Posts = props => {
             const displayDate = new Date(message.date).toISOString();
             return (
               <div key={message.id} className="posted-message">
-                {console.log(message.id)}
                 <div className="message-credentials">
                   <img
                     src={message.image}

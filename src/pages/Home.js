@@ -36,27 +36,6 @@ const Home = () => {
       });
   });
 
-  // function handleSnapshot(snapshot) {
-  //   const array = [];
-  //   snapshot.docs.map(doc => {
-  //     let docRef = db.collection("users").doc(doc.data().userId);
-  //     docRef.get().then(function(document) {
-  //       const messageObject = {
-  //         name: document.data().name,
-  //         image: document.data().image,
-  //         date: doc.data().date,
-  //         content: doc.data().content,
-  //         id: doc.data().id
-  //       };
-  //       array.push(messageObject);
-  //       setTempArray(array);
-  //     });
-  //   });
-  //   appContext.setMessagesArray(tempArray);
-  //   let lastVisible = snapshot.docs[snapshot.docs.length - 1];
-  //   setLastDocument(lastVisible);
-  // }
-
   useEffect(() => {
     loadMessages();
   }, []);
