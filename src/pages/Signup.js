@@ -5,6 +5,7 @@ import firebase from "../lib/firebase";
 import "firebase/auth";
 import AppContext from "../context/AppContext";
 import Spinner from "../components/Spinner";
+import GoogleSignIn from "../components/GoogleSignIn";
 
 const Signup = ({ history }) => {
   const defaultImage =
@@ -163,20 +164,23 @@ const Signup = ({ history }) => {
                     errors.confirmpassword}
                 </div>
               </div>
-              {isLoading && (
-                <div className="login-spinner">
-                  <Spinner />
-                </div>
-              )}
-              {!isLoading && (
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="button"
-                >
-                  Signup
-                </button>
-              )}
+              <div className="buttons-wrapper">
+                {isLoading && (
+                  <div className="login-spinner">
+                    <Spinner />
+                  </div>
+                )}
+                {!isLoading && (
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="button"
+                  >
+                    Signup
+                  </button>
+                )}
+                {!isLoading && <GoogleSignIn />}
+              </div>
             </form>
           </div>
         )}

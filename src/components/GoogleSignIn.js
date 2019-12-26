@@ -2,10 +2,9 @@ import React from "react";
 import "firebase/auth";
 import firebase from "../lib/firebase";
 
-
 const GoogleSignIn = () => {
   var provider = new firebase.auth.GoogleAuthProvider();
-  
+
   const handleClick = e => {
     firebase
       .auth()
@@ -28,7 +27,7 @@ const GoogleSignIn = () => {
       });
   };
 
-  return <button onClick={e => handleClick(e)}>Google Sign In</button>;
+  return <button onClick={e => handleClick(e)} className="google-login" />;
 };
 
 export default GoogleSignIn;

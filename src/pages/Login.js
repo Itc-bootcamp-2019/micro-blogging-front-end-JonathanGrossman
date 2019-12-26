@@ -81,7 +81,6 @@ const Login = ({ history }) => {
   }
   return (
     <div>
-      <GoogleSignIn />
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={values => {
@@ -166,20 +165,23 @@ const Login = ({ history }) => {
                   Forgot password?
                 </Link>
               </div>
-              {isLoading && (
-                <div className="login-spinner">
-                  <Spinner />
-                </div>
-              )}
-              {!isLoading && (
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="button"
-                >
-                  Login
-                </button>
-              )}
+              <div className="buttons-wrapper">
+                {isLoading && (
+                  <div className="login-spinner">
+                    <Spinner />
+                  </div>
+                )}
+                {!isLoading && (
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="button"
+                  >
+                    Login
+                  </button>
+                )}
+                {!isLoading && <GoogleSignIn />}
+              </div>
             </form>
           </div>
         )}

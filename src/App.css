@@ -4,6 +4,7 @@
 
 body {
   background: #15202b;
+  font-family: Roboto, sans-serif;
 }
 
 .navbar-wrapper {
@@ -26,7 +27,6 @@ body {
 }
 
 .navbar-item {
-  font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -76,6 +76,11 @@ body {
   color: #cccccc;
 }
 
+.buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
 .button {
   height: 34px;
   width: 68px;
@@ -89,6 +94,13 @@ body {
   color: #ffffff;
   cursor: pointer;
   border: none;
+}
+
+.google-login {
+  background-image: url("./img/btn_google_signin_light_normal_web.png");
+  cursor: pointer;
+  height: 46px;
+  width: 191px;
 }
 
 .message-button-home {
