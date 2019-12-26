@@ -69,8 +69,8 @@ const Signup = ({ history }) => {
                       .doc(docRef.id)
                       .update({ id: docRef.id });
                     appContext.setUserId(docRef.id);
-                    appContext.setUserName(values.setUserName);
-                    appContext.setUserEmail(values.setUserEmail);
+                    appContext.setUserName(values.userName);
+                    appContext.setUserEmail(values.userEmail);
                     setIsLoading(false);
                     history.push("/");
                   })

@@ -7,14 +7,64 @@ import "firebase/auth";
 import { AuthContext } from "../auth/Auth";
 import AppContext from "../context/AppContext";
 import Spinner from "../components/Spinner";
+import GoogleSignIn from "../components/GoogleSignIn";
 
 const Login = ({ history }) => {
   const appContext = useContext(AppContext);
   const currentUser = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+  const db = firebase.firestore();
+
+  const checkUserExistsInCollection = userToValidate => {
+    const usersArray = [];
+    db.collection("users")
+      .get()
+      .then(function(querySnapshot) {
+        const filteredUsersArray = [];
+        querySnapshot.forEach(function(doc) {
+          usersArray.push(doc.data().email);
+          if (!usersArray.includes(userToValidate.email)) {
+            signUpUser(userToValidate);
+          }
+          db.collection("users")
+            .get()
+            .then(function(usersSnapshot) {
+              usersSnapshot.forEach(function(doc) {
+                if (!filteredUsersArray.includes(doc.data())) {
+                  filteredUsersArray.push(doc.data());
+                }
+              });
+            });
+        });
+      });
+  };
+
+  const signUpUser = userToValidate => {
+    setTimeout(() => {
+      db.collection("users")
+        .doc(userToValidate.uid)
+        .set({
+          name: userToValidate.displayName,
+          email: userToValidate.email,
+          image: userToValidate.photoURL,
+          id: userToValidate.uid
+        })
+        .then(function(docRef) {
+          appContext.setUserId(userToValidate.uid);
+          appContext.setUserName(userToValidate.displayName);
+          appContext.setUserEmail(userToValidate.email);
+          setIsLoading(false);
+          history.push("/");
+        })
+        .catch(function(error) {
+          //handle error
+        });
+    }, 1000);
+  };
+
   if (currentUser) {
+    checkUserExistsInCollection(currentUser);
     appContext.setSignedInUser(currentUser);
-    const db = firebase.firestore();
     db.collection("users")
       .get()
       .then(function(querySnapshot) {
@@ -31,6 +81,7 @@ const Login = ({ history }) => {
   }
   return (
     <div>
+      <GoogleSignIn />
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={values => {
