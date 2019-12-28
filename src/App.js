@@ -45,9 +45,9 @@ function App() {
   const [urlProfileImage, setUrlProfileImage] = useState("");
   const [reauthRequired, setReauthRequired] = useState(false);
   const [verifyOldEmail, setVerifyOldEmail] = useState(false);
-  const successMessage = "User Name updated!";
+  const successMessage = "Profile updated!";
 
-  const updateUserName = history => {
+  const updateUserName = () => {
     const user = firebase.auth().currentUser;
     if (!reauthRequired) {
       if (userName !== "") {
@@ -113,7 +113,9 @@ function App() {
           .update({ id: docRef.id });
         setInputValidity(true);
         setIsSpinning(false);
-        setMessagesArray([...messagesArray], value);
+        if (!messagesArray.includes(value)) {
+          setMessagesArray([...messagesArray], value);
+        }
       })
       .catch(function(error) {
         setIsError(true);

@@ -23,7 +23,9 @@ const Posts = props => {
         date: doc.data().date,
         content: doc.data().content
       };
-      appContext.setMessagesArray(prevArray => [...prevArray, messageObject]);
+      if (!appContext.messagesArray.includes(messageObject)) {
+        appContext.setMessagesArray(prevArray => [...prevArray, messageObject]);
+      }
       var lastVisible = snapshot.docs[snapshot.docs.length - 1];
       setLastDocument(lastVisible);
       setHasMoreMessages(true);
@@ -36,7 +38,7 @@ const Posts = props => {
       db.collection("messages")
         .orderBy("date", "desc")
         .startAfter(lastDocument)
-        .limit(5)
+        .limit(20)
         .get()
         .then(function(snapshot) {
           snapshot.docs.map(doc => {
@@ -60,21 +62,25 @@ const Posts = props => {
           }
         >
           {sortedMessagesArray(appContext.messagesArray).map(message => {
-            const displayDate = new Date(message.date).toISOString();
-            return (
-              <div key={message.id} className="posted-message">
-                <div className="message-credentials">
-                  <img
-                    src={message.image}
-                    alt="user"
-                    className="message-photo"
-                  />
-                  <div>{message.name}</div>
-                  <div>{displayDate}</div>
+            const arrayToScreenForDuplicates = [];
+            if (!arrayToScreenForDuplicates.includes(message.id)) {
+              arrayToScreenForDuplicates.push(message.id);
+              const displayDate = new Date(message.date).toISOString();
+              return (
+                <div key={message.id} className="posted-message">
+                  <div className="message-credentials">
+                    <img
+                      src={message.image}
+                      alt="user"
+                      className="message-photo"
+                    />
+                    <div>{message.name}</div>
+                    <div>{displayDate}</div>
+                  </div>
+                  {message.content}
                 </div>
-                {message.content}
-              </div>
-            );
+              );
+            }
           })}
         </InfiniteScroll>
       )}

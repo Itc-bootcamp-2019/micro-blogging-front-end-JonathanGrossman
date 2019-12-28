@@ -9,7 +9,7 @@ import GoogleSignIn from "../components/GoogleSignIn";
 
 const Signup = ({ history }) => {
   const defaultImage =
-    "https://firebasestorage.googleapis.com/v0/b/cdh1-a7b54.appspot.com/o/images%2Fdefault.jpg?alt=media&token=e56251de-275b-4bd0-88ea-54cea0f71a71";
+    "https://firebasestorage.googleapis.com/v0/b/portfolio-641ec.appspot.com/o/images%2Fdefault.jpg?alt=media&token=8a62cb01-ec75-499b-b2d0-0f2cf581d94e";
   const appContext = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
 
